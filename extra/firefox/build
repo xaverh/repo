@@ -4,9 +4,6 @@ for p in *.patch; do
     patch -p1 < "$p"
 done
 
-# X11-less webrtc patch from bugzilla. Very large so a URL is used.
-patch -p1 < attachment.cgi\?id=9202429
-
 # Build autoconf 2.13 for Firefox's sole use.
 # See: https://bugzilla.mozilla.org/show_bug.cgi?id=104642
 (
@@ -60,11 +57,10 @@ export LDFLAGS="$LDFLAGS -Wl,-rpath=/usr/lib/firefox,--enable-new-dtags"
 export RUSTFLAGS="$RUSTFLAGS -Cdebuginfo=0"
 export MACH_USE_SYSTEM_PYTHON=1
 export MOZ_DEBUG_FLAGS=-g0
-export MOZBUILD_STATE_PATH=$PWD/state
+export MOZBUILD_STATE_PATH="$PWD/state"
 export MOZ_NOSPAM=1
 
 cat > .mozconfig << EOF
-ac_add_options --enable-default-toolkit=cairo-gtk3-wayland
 ac_add_options --prefix=/usr
 ac_add_options --libdir=/usr/lib
 ac_add_options --enable-alsa
@@ -75,6 +71,7 @@ ac_add_options --enable-install-strip
 ac_add_options --enable-official-branding
 ac_add_options --enable-application=browser
 ac_add_options --enable-optimize="${CFLAGS:-} -w"
+ac_add_options --with-wayland
 ac_add_options --with-system-libvpx
 ac_add_options --with-system-ffi
 ac_add_options --with-system-png
@@ -83,9 +80,9 @@ ac_add_options --with-system-zlib
 ac_add_options --with-system-pixman
 ac_add_options --without-system-nss
 ac_add_options --without-system-nspr
+ac_add_options --without-wasm-sandboxed-libraries
 ac_add_options --disable-eme
 ac_add_options --disable-dbus
-ac_add_options --disable-gold
 ac_add_options --disable-tests
 ac_add_options --disable-vtune
 ac_add_options --disable-updater
@@ -116,4 +113,3 @@ rm -rf \
     "$1/usr/lib/firefox/browser/features/webcompat-reporter@mozilla.org.xpi" \
     "$1/usr/lib/firefox/browser/features/webcompat@mozilla.org.xpi" \
     "$1/usr/lib/firefox/browser/features/doh-rollout@mozilla.org.xpi"
-
