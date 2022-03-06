@@ -7,10 +7,12 @@ export CXXFLAGS="-L$PWD/xxhash -I$PWD/xxhash $CXXFLAGS"
 
 # Force a static build so shared library breakage does not also break the
 # linker (and therefore the ability to recover from the issue).
-export LDFLAGS="$LDFLAGS -static"
+# XXX: Static linking prevents mold from using dlopen() which is required
+# for performing LTO.
+# export LDFLAGS="$LDFLAGS -static"
 
 make
-make install
+make PREFIX=/usr install
 
 # Create a symbolic link so users can use mold as the linker system-wide
 # (without need for special CFLAGS/CXXFLAGS).
