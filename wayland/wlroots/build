@@ -5,7 +5,6 @@ meson \
     -Ddefault_library=both \
     -Dexamples=false \
     -Dxcb-errors=disabled \
-    -Dx11-backend=disabled \
     -Drenderers=gles2 \
     . build
 
