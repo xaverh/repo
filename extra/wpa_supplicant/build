@@ -13,6 +13,8 @@ export LDFLAGS="-L$PWD/libnl"
 (
     cd libnl
 
+    # CFLAGS must expand to individual arguments.
+    # shellcheck disable=2086
     $CC $CFLAGS $CPPFLAGS -c ./*.c
     ar rc libnl-tiny.a ./*.o
 )
