@@ -8,7 +8,7 @@ tar xf libnl.tar.gz
 mv libnl-tiny* libnl
 
 export CFLAGS="$CFLAGS -D_GNU_SOURCE -I$PWD/libnl/include"
-export LDFLAGS="-L$PWD/libnl"
+export LDFLAGS="$LDFLAGS -L$PWD/libnl"
 
 (
     cd libnl
