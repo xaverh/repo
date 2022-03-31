@@ -89,4 +89,3 @@ for f in "$1/usr/lib/pkgconfig/"*.pc; do
     sed 's/epoxy >= 1.4//' "$f" > _
     mv -f _ "$f"
 done
-
