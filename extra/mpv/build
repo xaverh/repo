@@ -26,3 +26,7 @@ meson \
 
 ninja -C output
 ninja -C output install
+
+rm -rf \
+    "$1/usr/share/zsh" \
+    "$1/usr/share/bash-completion"
