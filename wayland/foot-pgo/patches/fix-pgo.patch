@@ -1,76 +1,31 @@
-diff --git a/meson.build b/meson.build
-index 49611dc..24d74cf 100644
---- a/meson.build
-+++ b/meson.build
-@@ -181,9 +181,13 @@ vtlib = static_library(
- 
- pgolib = static_library(
-   'pgolib',
-+  'config.c', 'config.h',
-   'grid.c', 'grid.h',
-+  'key-binding.c', 'key-binding.h',
-   'selection.c', 'selection.h',
-   'terminal.c', 'terminal.h',
-+  'tokenize.c', 'tokenize.h',
-+  'user-notification.c', 'user-notification.h',
-   wl_proto_src + wl_proto_headers,
-   dependencies: [libepoll, pixman, fcft, tllist, wayland_client, xkb, utf8proc],
-   link_with: vtlib,
-@@ -203,14 +207,12 @@ executable(
-   'foot',
-   'async.c', 'async.h',
-   'box-drawing.c', 'box-drawing.h',
--  'config.c', 'config.h',
-   'commands.c', 'commands.h',
-   'extract.c', 'extract.h',
-   'fdm.c', 'fdm.h',
-   'foot-features.h',
-   'ime.c', 'ime.h',
-   'input.c', 'input.h',
--  'key-binding.c', 'key-binding.h',
-   'main.c',
-   'notify.c', 'notify.h',
-   'quirks.c', 'quirks.h',
-@@ -221,9 +223,7 @@ executable(
-   'shm.c', 'shm.h',
-   'slave.c', 'slave.h',
-   'spawn.c', 'spawn.h',
--  'tokenize.c', 'tokenize.h',
-   'url-mode.c', 'url-mode.h',
--  'user-notification.c', 'user-notification.h',
-   'wayland.c', 'wayland.h',
-   wl_proto_src + wl_proto_headers, version,
-   dependencies: [math, threads, libepoll, pixman, wayland_client, wayland_cursor, xkb, fontconfig, utf8proc,
 diff --git a/pgo/pgo.c b/pgo/pgo.c
-index 26e0c10..ba92efd 100644
+index 26e0c10e..92d97dbf 100644
 --- a/pgo/pgo.c
 +++ b/pgo/pgo.c
-@@ -171,28 +171,6 @@ void get_current_modifiers(const struct seat *seat,
-                            xkb_mod_mask_t *effective,
-                            xkb_mod_mask_t *consumed, uint32_t key) {}
- 
--static struct key_binding_set kbd;
--static bool kbd_initialized = false;
--
--struct key_binding_set *
--key_binding_for(
--    struct key_binding_manager *mgr, const struct terminal *term,
--    const struct seat *seat)
--{
--    if (!kbd_initialized) {
--        kbd_initialized = true;
--        kbd = (struct key_binding_set){
--            .key = tll_init(),
--            .search = tll_init(),
--            .url = tll_init(),
--            .mouse = tll_init(),
--            .selection_overrides = 0,
--        };
--    }
--
--    return &kbd;
--}
--
- int
- main(int argc, const char *const *argv)
+@@ -178,6 +178,13 @@ struct key_binding_set *
+ key_binding_for(
+     struct key_binding_manager *mgr, const struct terminal *term,
+     const struct seat *seat)
++{
++    return &kbd;
++}
++
++void
++key_binding_new_for_term(
++    struct key_binding_manager *mgr, const struct terminal *term)
  {
+     if (!kbd_initialized) {
+         kbd_initialized = true;
+@@ -189,8 +196,11 @@ key_binding_for(
+             .selection_overrides = 0,
+         };
+     }
++}
+ 
+-    return &kbd;
++void
++key_binding_unref_term(struct key_binding_manager *mgr, const struct terminal *term)
++{
+ }
+ 
+ int
