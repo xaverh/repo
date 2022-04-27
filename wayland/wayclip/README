@@ -1,11 +1,11 @@
-wl-clipboard
+wayclip
 ________________________________________________________________________________
 
-This project implements two command-line Wayland clipboard utilities, wl-copy
-and wl-paste, that let you easily copy data between the clipboard and Unix
+This project implements two command-line Wayland clipboard utilities, waycopy
+and waypaste, that let you easily copy data between the clipboard and Unix
 pipes, sockets, files and so on. [0]
 
-Upstream: https://github.com/bugaevc/wl-clipboard
+Upstream: https://github.com/noocsharp/wayclip
 
 
 [000] Index
@@ -21,7 +21,7 @@ ________________________________________________________________________________
 
 +------------------------------------------------------------------------------+
 |                                                                              |
-|  $ kiss b wl-clipboard                                                       |
+|  $ kiss b wayclip                                                            |
 |                                                                              |
 +------------------------------------------------------------------------------+
 
@@ -29,11 +29,12 @@ ________________________________________________________________________________
 [002] Usage
 ________________________________________________________________________________
 
-Refer to the manual pages and command help output.
+Refer to the command help output. Refer to the project's upstream for more
+information.
 
 
 [003] References
 ________________________________________________________________________________
 
-[0] https://github.com/bugaevc/wl-clipboard
+[0] https://github.com/noocsharp/wayclip
 
