@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
-patch -p1 < sway-static.patch
-patch -p1 < no-evdev.patch
+for p in *.patch; do
+    patch -p1 < "$p"
+done
 
 # Build fails in subprojects/seatd with clang
 # due to -Werror -> -Wsign-compare.
