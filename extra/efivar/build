@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+patch -p1 < musl-compat.patch
 patch -p1 < no-add-needed.patch
 
 # Disable test program 'thread-test' as it causes build failures when using
