@@ -1,11 +1,8 @@
 #!/bin/sh -e
 
-for p in *.patch; do
+for p in no-x11/*.patch *.patch; do
     patch -p1 < "$p"
 done
-
-mv widget/x11/keysym2ucs.c widget/gtk/keysym2ucs.c
-mv widget/x11/keysym2ucs.h widget/gtk/keysym2ucs.h
 
 # Build autoconf 2.13 for Firefox's sole use.
 # See: https://bugzilla.mozilla.org/show_bug.cgi?id=104642
@@ -70,6 +67,7 @@ ac_add_options --enable-alsa
 ac_add_options --enable-strip
 ac_add_options --enable-release
 ac_add_options --enable-rust-simd
+ac_add_options --enable-audio-backends=alsa
 ac_add_options --enable-install-strip
 ac_add_options --enable-official-branding
 ac_add_options --enable-application=browser
@@ -95,7 +93,6 @@ ac_add_options --disable-callgrind
 ac_add_options --disable-profiling
 ac_add_options --disable-necko-wifi
 ac_add_options --disable-crashreporter
-ac_add_options --disable-pulseaudio
 ac_add_options --disable-accessibility
 ac_add_options --disable-debug
 ac_add_options --disable-debug-symbols
