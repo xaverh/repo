@@ -1,8 +1,26 @@
 #!/bin/sh -e
 
+(
+    cd dom/media/webrtc/third_party_build/gn-configs
+
+    mv x64_False_arm64_linux.json      x64_False_arm64_linux_True.json
+    mv x64_False_arm64_linux.mozconfig x64_False_arm64_linux_True.mozconfig
+    mv x64_False_x64_linux.json        x64_False_x64_linux_True.json
+    mv x64_False_x86_linux.json        x64_False_x86_linux_True.json
+    mv x64_False_x86_linux.mozconfig   x64_False_x86_linux_True.mozconfig
+    mv x64_True_arm64_linux.json       x64_True_arm64_linux_True.json
+    mv x64_True_arm64_linux.mozconfig  x64_True_arm64_linux_True.mozconfig
+    mv x64_True_x64_linux.json         x64_True_x64_linux_True.json
+    mv x64_True_x64_linux.mozconfig    x64_True_x64_linux_True.mozconfig
+    mv x64_True_x86_linux.json         x64_True_x86_linux_True.json
+    mv x64_True_x86_linux.mozconfig    x64_True_x86_linux_True.mozconfig
+)
+
 for p in no-x11/*.patch *.patch; do
     patch -p1 < "$p"
 done
+
+mv widget/gtk/mozwayland/mozwayland.h widget/gtk/wayland/mozwayland.h
 
 # Build autoconf 2.13 for Firefox's sole use.
 # See: https://bugzilla.mozilla.org/show_bug.cgi?id=104642
@@ -55,7 +73,7 @@ export RUSTFLAGS="$RUSTFLAGS --remap-path-prefix=$PWD=."
 
 export LDFLAGS="$LDFLAGS -Wl,-rpath=/usr/lib/firefox,--enable-new-dtags"
 export RUSTFLAGS="$RUSTFLAGS -Cdebuginfo=0"
-export MACH_USE_SYSTEM_PYTHON=1
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
 export MOZ_DEBUG_FLAGS=-g0
 export MOZBUILD_STATE_PATH="$PWD/state"
 export MOZ_NOSPAM=1
@@ -63,7 +81,6 @@ export MOZ_NOSPAM=1
 cat > .mozconfig << EOF
 ac_add_options --prefix=/usr
 ac_add_options --libdir=/usr/lib
-ac_add_options --enable-alsa
 ac_add_options --enable-strip
 ac_add_options --enable-release
 ac_add_options --enable-rust-simd
