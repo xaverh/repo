@@ -16,11 +16,11 @@
     mv x64_True_x86_linux.mozconfig    x64_True_x86_linux_True.mozconfig
 )
 
+mv widget/gtk/mozwayland/mozwayland.h widget/gtk/wayland/mozwayland.h
+
 for p in no-x11/*.patch *.patch; do
     patch -p1 < "$p"
 done
-
-mv widget/gtk/mozwayland/mozwayland.h widget/gtk/wayland/mozwayland.h
 
 # Build autoconf 2.13 for Firefox's sole use.
 # See: https://bugzilla.mozilla.org/show_bug.cgi?id=104642
