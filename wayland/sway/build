@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Build fails with gcc 12 due to -Werror.
+export CFLAGS="$CFLAGS -Wno-error"
+
 patch -p1 < no-evdev.patch
 
 # Default background color.
