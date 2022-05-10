@@ -2,7 +2,7 @@
 # converts the <rules>.xml file to the old format <rules>.lst file
 # Usage: xml2lst < filename.xml > filename.lst
 
-[ "$1" ] && "$0" < "$1" && exit
+[ "$1" ] && exec 0< "$1"
 
 var=0 com=0 nam=''
 
