@@ -22,7 +22,7 @@ meson \
     -Dwlroots:examples=false \
     -Dwlroots:xcb-errors=disabled \
     -Dwlroots:default_library=static \
-    -Dseatd:builtin=enabled \
+    -Dseatd:libseat-builtin=enabled \
     -Dseatd:default_library=static \
     --force-fallback-for=wlroots,seatd \
     . build
