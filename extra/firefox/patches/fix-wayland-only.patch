@@ -1,0 +1,54 @@
+diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
+index d7dbbc6..fd88c49 100644
+--- a/widget/gtk/mozgtk/mozgtk.c
++++ b/widget/gtk/mozgtk/mozgtk.c
+@@ -6,6 +6,8 @@
+ 
+ #include "mozilla/Types.h"
+ 
++MOZ_EXPORT unsigned int gtk_get_debug_flags(void) { return 0; }
++
+ #ifdef MOZ_X11
+ #  include <X11/Xlib.h>
+ // Bug 1271100
+diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
+index 555e8ce..543027f 100644
+--- a/widget/gtk/nsClipboard.cpp
++++ b/widget/gtk/nsClipboard.cpp
+@@ -34,12 +34,15 @@
+ #include "mozilla/SchedulerGroup.h"
+ #include "mozilla/StaticPrefs_widget.h"
+ #include "mozilla/TimeStamp.h"
++#include "GRefPtr.h"
+ #include "WidgetUtilsGtk.h"
+ 
+ #include "imgIContainer.h"
+ 
+ #include <gtk/gtk.h>
+-#include <gtk/gtkx.h>
++#if defined(MOZ_X11)
++#  include <gtk/gtkx.h>
++#endif
+ 
+ #include "mozilla/Encoding.h"
+ 
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+index c09386c..9db855a 100644
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -5304,12 +5304,11 @@ void nsWindow::ConfigureGdkWindow() {
+     // tearing because Gecko does not align its framebuffer updates with
+     // vblank.
+     SetCompositorHint(GTK_WIDGET_COMPOSIDED_ENABLED);
+-
+-    // Dummy call to a function in mozgtk to prevent the linker from removing
+-    // the dependency with --as-needed.
+-    XShmQueryExtension(DefaultXDisplay());
+   }
+ #endif
++  // Dummy call to a function in mozgtk to prevent the linker from removing
++  // the dependency with --as-needed.
++  gtk_get_debug_flags();
+ #ifdef MOZ_WAYLAND
+   if (GdkIsWaylandDisplay()) {
+     mSurfaceProvider.Initialize(this);
