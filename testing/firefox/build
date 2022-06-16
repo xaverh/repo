@@ -31,11 +31,6 @@ for f in zip unzip; do (
 
 export PATH="$PWD/junk/bin:$PATH"
 
-export CC=clang
-export CXX=clang++
-export CFLAGS="--target=x86_64-pc-linux-musl $CFLAGS"
-export CXXFLAGS="--target=x86_64-pc-linux-musl $CXXFLAGS"
-
 # If using libc++, CXXSTDLIB needs to be set manually.
 case $("$CC" -print-file-name=libc++.so) in */*)
     export CXXSTDLIB=c++
