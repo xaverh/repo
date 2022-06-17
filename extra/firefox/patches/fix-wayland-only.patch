@@ -142,19 +142,32 @@ index 5218c7d..2e578b9 100644
  
 -REQUIRES_UNIFIED_BUILD = True
 +CXXFLAGS += ["-Werror=switch"]
+diff --git a/widget/gtk/mozgtk/moz.build b/widget/gtk/mozgtk/moz.build
+index f860f82..d5e78d0 100644
+--- a/widget/gtk/mozgtk/moz.build
++++ b/widget/gtk/mozgtk/moz.build
+@@ -11,6 +11,7 @@ SOURCES += [
+ ]
+ 
+ CFLAGS += CONFIG["MOZ_X11_CFLAGS"]
++CFLAGS += CONFIG["MOZ_GTK3_CFLAGS"]
+ 
+ # If LDFLAGS contains -Wl,--as-needed or if it's the default for the toolchain,
+ # we need to add -Wl,--no-as-needed before the gtk libraries, otherwise the
 diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
-index d7dbbc6..8c73c89 100644
+index d7dbbc6..d95746f 100644
 --- a/widget/gtk/mozgtk/mozgtk.c
 +++ b/widget/gtk/mozgtk/mozgtk.c
-@@ -6,6 +6,12 @@
+@@ -6,6 +6,13 @@
  
  #include "mozilla/Types.h"
  
++#include <gdk/gdk.h>
++
 +// Dummy call to gtk3 library to prevent the linker from removing
 +// the gtk3 dependency with --as-needed.
 +// see toolkit/library/moz.build for details.
-+MOZ_EXPORT void gdk_display_get_default();
-+MOZ_EXPORT void mozgtk_linker_holder(void) { gdk_display_get_default(); }
++MOZ_EXPORT void mozgtk_linker_holder() { gdk_display_get_default(); }
 +
  #ifdef MOZ_X11
  #  include <X11/Xlib.h>
@@ -172,10 +185,10 @@ index 2ebb62f..6752c52 100644
  #include "nsComponentManagerUtils.h"
  #include "nsGtkUtils.h"
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 555e8ce..fd49d92 100644
+index 555e8ce..48a827f 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
-@@ -31,6 +31,7 @@
+@@ -31,15 +31,19 @@
  #include "nsIObserverService.h"
  #include "mozilla/Services.h"
  #include "mozilla/RefPtr.h"
@@ -183,7 +196,9 @@ index 555e8ce..fd49d92 100644
  #include "mozilla/SchedulerGroup.h"
  #include "mozilla/StaticPrefs_widget.h"
  #include "mozilla/TimeStamp.h"
-@@ -39,7 +40,9 @@
++#include "GRefPtr.h"
+ #include "WidgetUtilsGtk.h"
+ 
  #include "imgIContainer.h"
  
  #include <gtk/gtk.h>
@@ -207,15 +222,15 @@ index 6fcc3e9..8462b6d 100644
  class nsWindow;
  
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index e14c4f4..3bd659d 100644
+index e14c4f4..cd82d54 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -267,6 +267,9 @@ static SystemTimeConverter<guint32>& TimeConverter() {
  
  bool nsWindow::sTransparentMainWindow = false;
  
-+/* forward declare from mozgtk */
-+MOZ_EXPORT extern "C" void mozgtk_linker_holder(void);
++// forward declare from mozgtk
++extern "C" MOZ_EXPORT void mozgtk_linker_holder();
 +
  namespace mozilla {
  
