@@ -4530,32 +4530,6 @@
                                      <signal name="button-press-event" handler="list_button_press_event_cb" swapped="no"/>
                                      <signal name="drag-data-received" handler="file_list_drag_data_received_cb" swapped="no"/>
                                      <signal name="drag-drop" handler="file_list_drag_drop_cb" swapped="no"/>
---- a/gtk/ui/gtkpathbar.ui
-+++ b/gtk/ui/gtkpathbar.ui
-@@ -6,11 +6,6 @@
-     <property name="can-focus">1</property>
-     <property name="receives-default">1</property>
-     <property name="focus-on-click">0</property>
--    <child internal-child="accessible">
--      <object class="AtkObject" id="down_slider_button-atkobject">
--        <property name="AtkObject::accessible-name" translatable="yes">Down Path</property>
--      </object>
--    </child>
-     <signal name="button-press-event" handler="gtk_path_bar_slider_button_press" swapped="no"/>
-     <signal name="button-release-event" handler="gtk_path_bar_slider_button_release" swapped="no"/>
-     <signal name="focus-out-event" handler="gtk_path_bar_slider_down_defocus" swapped="no"/>
-@@ -31,11 +26,6 @@
-     <property name="can-focus">1</property>
-     <property name="receives-default">1</property>
-     <property name="focus-on-click">0</property>
--    <child internal-child="accessible">
--      <object class="AtkObject" id="up_slider_button-atkobject">
--        <property name="AtkObject::accessible-name" translatable="yes">Up Path</property>
--      </object>
--    </child>
-     <signal name="button-press-event" handler="gtk_path_bar_slider_button_press" swapped="no"/>
-     <signal name="button-release-event" handler="gtk_path_bar_slider_button_release" swapped="no"/>
-     <signal name="focus-out-event" handler="gtk_path_bar_slider_up_defocus" swapped="no"/>
 --- a/gtk/ui/gtkprintunixdialog.ui
 +++ b/gtk/ui/gtkprintunixdialog.ui
 @@ -182,9 +182,6 @@
@@ -4577,9 +4551,9 @@
 -                                        <property name="AtkObject::accessible-name" translatable="yes">Pages</property>
 -                                        <property name="AtkObject::accessible-description" translatable="yes">Specify one or more page ranges,
 - e.g. 1–3, 7, 11</property>
-                                       </object>
+-                                      </object>
 -                                    </child>
--                                  </object>
+                                   </object>
                                    <packing>
                                      <property name="left-attach">1</property>
                                      <property name="top-attach">3</property>
@@ -4681,7 +4655,7 @@
                            </object>
                            <packing>
                              <property name="fill">0</property>
-@@ -1031,12 +991,6 @@
+@@ -1031,13 +991,6 @@
   e.g. 15∶30, 2∶35 pm, 14∶15∶20, 11∶46∶30 am, 4 pm</property>
                                  <property name="invisible-char">•</property>
                                  <property name="invisible-char-set">1</property>
@@ -4691,10 +4665,11 @@
 -                                    <property name="AtkObject::accessible-description" translatable="yes">Specify the time of print,
 - e.g. 15∶30, 2∶35 pm, 14∶15∶20, 11∶46∶30 am, 4 pm</property>
 -                                  </object>
-                                 </child>
+-                                </child>
                                  <signal name="changed" handler="update_print_at_option" object="GtkPrintUnixDialog" swapped="yes"/>
                                </object>
-@@ -1064,9 +1018,6 @@
+                               <packing>
+@@ -1064,9 +1017,6 @@
                                  <property name="width">2</property>
                                </packing>
                              </child>
@@ -4704,7 +4679,7 @@
                            </object>
                            <packing>
                              <property name="fill">0</property>
-@@ -1093,9 +1044,6 @@
+@@ -1093,9 +1043,6 @@
                              <attributes>
                                <attribute name="weight" value="bold"/>
                              </attributes>
@@ -4714,7 +4689,7 @@
                            </object>
                            <packing>
                              <property name="fill">0</property>
-@@ -1155,9 +1103,6 @@
+@@ -1155,9 +1102,6 @@
                                  <property name="top-attach">1</property>
                                </packing>
                              </child>
