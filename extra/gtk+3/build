@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
-patch -p1 < no-fribidi.patch
-patch -p1 < fix-firefox.patch
+for p in *.patch; do
+    patch -p1 < "$p"
+done
 
 # Don't enable native language support and don't compile schemas.
 sed -e '/compile_schemas/s/true/false/' \
