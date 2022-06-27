@@ -20,7 +20,6 @@ build_harfbuzz() (
 
     meson \
         --prefix=/usr \
-        -Dpkg_config_path="$DESTDIR/usr/lib/pkgconfig" \
         -Ddefault_library=both \
         -Dglib=disabled \
         -Dfreetype=enabled \
@@ -36,13 +35,12 @@ build_harfbuzz() (
 )
 
 # Point Freetype to the Harfbuzz files.
-export CFLAGS="$CFLAGS -I$DESTDIR/usr/include/harfbuzz"
-export CFLAGS="$CFLAGS -L$DESTDIR/usr/lib "
+export CPPFLAGS="$CPPFLAGS -I$DESTDIR/usr/include/harfbuzz"
+export LDFLAGS="$LDFLAGS -L$DESTDIR/usr/lib"
 export PKG_CONFIG_PATH=$DESTDIR/usr/lib/pkgconfig
 
 # Point Harfbuzz to the Freetype files.
-export CXXFLAGS="$CXXFLAGS -I$DESTDIR/usr/include/freetype2"
-export CXXFLAGS="$CXXFLAGS -L$DESTDIR/usr/lib"
+export CPPFLAGS="$CPPFLAGS -I$DESTDIR/usr/include/freetype2"
 
 build_freetype -Dharfbuzz=disabled
 build_harfbuzz
