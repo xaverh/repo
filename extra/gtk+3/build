@@ -30,7 +30,7 @@ meson setup \
     output
 
 ninja -C output
-ninja -C output install
+meson install -C output --skip-subprojects
 
 # GTK+3 on Wayland requires gsettings-desktop-schemas for gsettings to work
 # correctly. Under X11 it made use of xsettings but this is no longer the case.
@@ -56,8 +56,3 @@ for f in "$1/usr/lib/pkgconfig/"*.pc; do
     sed 's/epoxy >= 1.4//' "$f" > _
     mv -f _ "$f"
 done
-
-rm -rf \
-    "$1/usr/lib/pkgconfig/epoxy.pc" \
-    "$1/usr/lib/libepoxy.a" \
-    "$1/usr/include/epoxy"
