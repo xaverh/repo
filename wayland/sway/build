@@ -4,6 +4,7 @@
 export CFLAGS="$CFLAGS -Wno-error"
 
 patch -p1 < no-evdev.patch
+patch -p1 < pcre2.patch
 
 # Default background color.
 sed 's/0.25f, 0.25f, 0.25f/0.929, 0.870, 0.678/' \
