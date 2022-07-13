@@ -1,5 +1,4 @@
 libffi
-linux-headers make
 meson   make
 pcre2
 pkgconf make
