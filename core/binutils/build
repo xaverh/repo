@@ -30,12 +30,4 @@ make configure-host
 make tooldir=/usr
 make tooldir=/usr install
 
-# These programs are safe to build statically.
-cd binutils
-make clean-binPROGRAMS
-make LDFLAGS="$LDFLAGS -all-static"
-for f in *; do
-    [ -e "$1/usr/bin/$f" ] && mv -f "$f" "$1/usr/bin/$f"
-done
-
 ln -sf ld.bfd "$1/usr/bin/ld"
