@@ -6,9 +6,8 @@ mkdir -p out
 (
     cd cyrus-sasl
 
-    export LDFLAGS="$LDFLAGS -lssl -lcrypto"
-
     ./configure \
+        LIBS='-lssl -lcrypto' \
         --prefix=/usr \
         --sysconfdir=/etc \
         --disable-shared \
