@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-: > tests/meson.build
+# Meson attemps to clone despite gtk_doc being disabled.
+rm subprojects/gi-docgen.wrap
 
 meson \
     --prefix=/usr \
@@ -10,9 +11,10 @@ meson \
     -Djpeg=enabled \
     -Dpng=enabled \
     -Dtiff=disabled \
-    -Ddocs=false \
+    -Dgtk_doc=false \
     -Dman=false \
     -Dgio_sniffing=false \
+    -Dtests=false \
     -Dinstalled_tests=false \
     -Dbuiltin_loaders=all \
     . output
