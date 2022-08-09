@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-# Meson attemps to clone despite gtk_doc being disabled.
-rm subprojects/gi-docgen.wrap
-
 meson \
     --prefix=/usr \
     --sysconfdir=/etc \
@@ -17,6 +14,7 @@ meson \
     -Dtests=false \
     -Dinstalled_tests=false \
     -Dbuiltin_loaders=all \
+    -Dwrap_mode=nofallback \
     . output
 
 ninja -C output
