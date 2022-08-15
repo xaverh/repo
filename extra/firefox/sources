@@ -7,3 +7,4 @@ patches/fix-linux-header.patch
 patches/fix-wayland-only.patch
 patches/no-dbus.patch
 patches/no-fribidi.patch
+patches/packed_simd_2-0.3.8.patch
