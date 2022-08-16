@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < awk.patch
-
 make
 make DESTDIR="$1" ZICDIR=/usr/bin install
 
