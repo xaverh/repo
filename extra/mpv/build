@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < libva.patch
-
 # Setup docutils to generate manual pages.
 {
     cd docutils
