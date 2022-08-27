@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < time_t.patch
-
 export LDFLAGS="$LDFLAGS -static"
 
 cmake -B build \
