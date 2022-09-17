@@ -1,12 +1,5 @@
 #!/bin/sh -e
 
-# static_assert is not defined in C99.
-export CFLAGS="$CFLAGS -std=gnu11"
-
-# Remove 'util-linux' dependency.
-sed 's/libmount_dep.found()/false/' meson.build > _
-mv -f _ meson.build
-
 : > fuzzing/meson.build
 
 meson \
@@ -17,6 +10,7 @@ meson \
     -Dman=false \
     -Dtests=false \
     -Dlibelf=disabled \
+    -Dnls=disabled \
     . build
 
 ninja -C build
