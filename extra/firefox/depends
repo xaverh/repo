@@ -15,6 +15,7 @@ libffi
 libjpeg-turbo
 libpng
 libvpx
+libwebp
 llvm          make
 m4            make
 mesa
