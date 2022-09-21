@@ -47,8 +47,9 @@ meson \
     -Dglx=disabled \
     -Degl=enabled \
     -Dvalgrind=false \
-    -Dzstd=false \
+    -Dzstd=disabled \
     -Dglvnd="${glvnd_enabled:-true}" \
+    -Dvulkan-drivers='' \
     . output
 
 ninja -C output
