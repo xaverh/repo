@@ -1,5 +1,5 @@
+fcft
 fontconfig
-freetype-harfbuzz
 libxkbcommon
 meson   make
 ncurses make

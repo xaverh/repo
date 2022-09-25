@@ -3,7 +3,6 @@
 meson \
     --prefix=/usr \
     --buildtype=release \
-    --force-fallback-for=fcft,tllist \
     -Dime=false \
     . output
 
