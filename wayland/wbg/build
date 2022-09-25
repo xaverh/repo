@@ -3,7 +3,6 @@
 meson \
     --prefix=/usr \
     --buildtype=release \
-    --force-fallback-for=tllist \
     -Djpeg=enabled \
     -Dpng=enabled \
     . output
