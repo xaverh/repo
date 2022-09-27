@@ -7,7 +7,7 @@
 # Set the CARGO_HOME variable to the current directory to prevent cargo from
 # touching '$HOME/.cargo'. This keeps the build contained to the package
 # manager's domain.
-export CARGO_HOME=$PWD
+export CARGO_HOME="$PWD"
 
 # Instruct the compiler to trim absolute paths in resulting binaries and instead
 # change them to relative paths ($PWD/... ./...).
