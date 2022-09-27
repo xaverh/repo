@@ -6,8 +6,14 @@
 # for performing LTO.
 # export LDFLAGS="$LDFLAGS -static"
 
-make
-make PREFIX=/usr install
+patch -p1 < elf_amd64_only.patch
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib
+
+cmake --build   build
+cmake --install build
 
 # Create a symbolic link so users can use mold as the linker system-wide
 # (without need for special CFLAGS/CXXFLAGS).

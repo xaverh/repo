@@ -1,3 +1,4 @@
-cmake   make
+cmake make
 openssl
 zlib
+zstd
