@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-cmake -B build \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DENABLE_SDL=ON \
-    -DENABLE_WX=OFF
-
-cmake --build   build
-cmake --install build
