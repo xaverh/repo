@@ -1,0 +1,10 @@
+cmake make
+curl
+gmp
+jsoncpp
+libXxf86vm
+libogg
+libvorbis
+luajit
+openal-soft
+sqlite

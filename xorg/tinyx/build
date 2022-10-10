@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+./autogen.sh
+
+./configure \
+    --prefix=/usr \
+    --with-fontdir=/usr/share/fonts
+
+make
+make install
+
+chmod u+s "$1/usr/bin/Xfbdev"
+chmod u+s "$1/usr/bin/Xvesa"
+
+# Install minimum requirement for bitmap fonts.
+mkdir -p "$1/usr/share/fonts/misc"
+cp ./*.pcf.gz fonts.alias fonts.dir "$1/usr/share/fonts/misc"

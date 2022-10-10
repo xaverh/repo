@@ -9,4 +9,13 @@ Also available here:
 
 https://kisslinux.org/wiki/pkg/firefox
 
+NOTE: Install the 'hicolor-icon-theme' package if
+      no other icon themes are installed.
+
+NOTE: Install the 'firefox-privacy' package to
+      enable extra privacy restrictions.
+
+NOTE: This includes more telemetry removals,
+      hardened settings, no phoning-home etc.
+
 EOF
