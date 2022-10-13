@@ -1,3 +1,4 @@
+SQLite
 glib
 glib-networking
 libnghttp2
@@ -6,4 +7,3 @@ libxml2
 meson make
 pkgconf make
 samurai make
-sqlite

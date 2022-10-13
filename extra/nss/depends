@@ -1,5 +1,5 @@
+SQLite
 git make
 linux-headers make
 nspr
-sqlite
 zlib

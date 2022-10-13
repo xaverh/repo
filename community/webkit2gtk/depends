@@ -1,3 +1,4 @@
+SQLite
 atk
 cairo
 cmake  make
@@ -15,4 +16,3 @@ mesa
 perl   make
 python make
 ruby   make
-sqlite

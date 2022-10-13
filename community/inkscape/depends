@@ -1,5 +1,6 @@
 Expat
 LibFFI
+SQLite
 atk
 atkmm
 boost
@@ -52,5 +53,4 @@ pangomm
 pixman
 poppler
 potrace
-sqlite
 tiff
