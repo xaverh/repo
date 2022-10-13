@@ -2,8 +2,11 @@
 #
 # System wide environment and startup programs.
 
-# Set default path (/usr/sbin:/sbin:/bin included for non-KISS Linux chroots).
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+# Set default path.
+export PATH=/bin
+
+# Set the default KISS_PATH.
+export KISS_PATH=/Data/Kiss/Repo/Stage0:/Data/Kiss/Repo/Metal:/Data/Kiss/Repo/core:/Data/Kiss/Repo/extra:/Data/Kiss/Repo/xorg:/Data/Kiss/Repo/community
 
 # Set default umask.
 umask 022
