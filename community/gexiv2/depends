@@ -1,7 +1,7 @@
+Expat
+LibFFI
 exiv2
-expat
 glib
-libffi
 meson make
 samurai make
 zlib

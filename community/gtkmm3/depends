@@ -1,8 +1,9 @@
+Expat
+LibFFI
 atk
 atkmm
 cairo
 cairomm
-expat
 fontconfig
 freetype-harfbuzz
 fribidi
@@ -24,7 +25,6 @@ libXrender
 libXxf86vm
 libdrm
 libepoxy
-libffi
 libjpeg-turbo
 libpng
 libsigc++

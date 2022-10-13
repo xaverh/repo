@@ -1,5 +1,5 @@
-expat
+Expat
 flex    make
-libffi
+LibFFI
 meson   make
 pkgconf make

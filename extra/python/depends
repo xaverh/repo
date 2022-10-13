@@ -1,6 +1,6 @@
 Expat
+LibFFI
 bzip2
-libffi
 openssl
 sqlite
 zlib

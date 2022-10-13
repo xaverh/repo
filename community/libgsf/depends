@@ -1,7 +1,7 @@
+LibFFI
 bzip2
 gdk-pixbuf    make
 glib
-libffi
 libxml2
 xz
 zlib

@@ -1,10 +1,11 @@
+Expat
+LibFFI
 alsa-lib
 atk
 bzip2
 cairo
 cbindgen      make
 clang         make
-expat
 ffmpeg
 fontconfig
 freetype-harfbuzz
@@ -28,7 +29,6 @@ libXt
 libXxf86vm
 libXtst
 libdrm
-libffi
 libjpeg-turbo
 libpng
 libvpx

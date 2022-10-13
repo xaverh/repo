@@ -1,7 +1,7 @@
+LibFFI
 atk
 glib
 glibmm
-libffi
 libsigc++
 meson make
 samurai make

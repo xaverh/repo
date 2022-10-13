@@ -1,5 +1,5 @@
+LibFFI
 glib
-libffi
 libsigc++
 meson make
 samurai make

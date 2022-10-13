@@ -1,7 +1,7 @@
+Expat
 bison make
 cairo
 curl
-expat
 freetype-harfbuzz
 gdk-pixbuf
 glib

@@ -1,5 +1,5 @@
+Expat
 bison        make
-expat
 flex         make
 libX11
 libXdamage

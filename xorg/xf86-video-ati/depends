@@ -1,5 +1,5 @@
+Expat
 autoconf make
-expat
 libdrm
 libpciaccess
 linux-headers make

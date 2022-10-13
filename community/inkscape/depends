@@ -1,3 +1,5 @@
+Expat
+LibFFI
 atk
 atkmm
 boost
@@ -5,7 +7,6 @@ cairo
 cairomm
 curl
 double-conversion
-expat
 fontconfig
 freetype-harfbuzz
 fribidi
@@ -34,7 +35,6 @@ libXrender
 libXxf86vm
 libdrm
 libepoxy
-libffi
 libjpeg-turbo
 libpng
 libpsl
