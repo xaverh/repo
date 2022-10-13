@@ -1,3 +1,4 @@
+Python make
 SQLite
 atk
 cairo
@@ -14,5 +15,4 @@ libwebp
 libxslt
 mesa
 perl   make
-python make
 ruby   make

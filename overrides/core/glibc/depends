@@ -1,4 +1,4 @@
 Gawk          make
+Python        make
 linux-headers
 pigz
-python        make

@@ -1,3 +1,4 @@
+Python
 gcc
 glu
 libX11
@@ -8,4 +9,3 @@ libXrandr
 libexecinfo
 mesa
 pkgconf make
-python

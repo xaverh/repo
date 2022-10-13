@@ -1,3 +1,4 @@
+Python  make
 alsa-lib
 ffmpeg
 freetype-harfbuzz
@@ -13,4 +14,3 @@ linux-headers make
 mesa
 meson make
 pkgconf make
-python  make

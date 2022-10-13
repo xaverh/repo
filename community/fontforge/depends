@@ -1,3 +1,4 @@
+Python
 cairo
 cmake make
 freetype-harfbuzz
@@ -9,6 +10,5 @@ libjpeg-turbo
 libpng
 libxml2
 pango
-python
 tiff
 zlib

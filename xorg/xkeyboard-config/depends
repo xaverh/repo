@@ -1,6 +1,6 @@
+Python  make
 libX11  make
 muon    make
 pkgconf make
-python  make
 samurai make
 xkbcomp

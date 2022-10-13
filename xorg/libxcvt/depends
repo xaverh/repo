@@ -1,7 +1,7 @@
+Python  make
 libXau
 muon make
 pkgconf make
-python  make
 samurai make
 xcb-proto
 xorg-util-macros

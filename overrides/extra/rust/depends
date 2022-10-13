@@ -1,8 +1,8 @@
+Python  make
 cmake   make
 curl    make
 llvm
 openssl
 pkgconf make
-python  make
 xz
 zlib

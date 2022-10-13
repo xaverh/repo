@@ -26,6 +26,6 @@ nss
 opus
 perl               make
 pkgconf            make
-python             make
+Python             make
 samurai            make
 xcb-proto

@@ -1,4 +1,5 @@
 Expat
+Python make
 bison make
 flex  make
 libdrm
@@ -9,7 +10,6 @@ llvm
 m4 make
 meson make
 pkgconf make
-python make
 wayland
 wayland-protocols make
 zlib

@@ -1,3 +1,4 @@
+Python  make
 cairo
 fontconfig
 freetype-harfbuzz
@@ -16,4 +17,3 @@ mesa
 meson   make
 pango
 pkgconf make
-python  make

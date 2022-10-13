@@ -1,3 +1,4 @@
+Python  make
 fcft
 fontconfig
 libxkbcommon
@@ -5,6 +6,5 @@ meson   make
 ncurses make
 pixman
 pkgconf make
-python  make
 wayland
 wayland-protocols make

@@ -1,5 +1,6 @@
 Expat
 LibFFI
+Python        make
 alsa-lib
 bzip2
 cairo
@@ -44,6 +45,5 @@ nss
 pango
 pixman
 pkgconf       make
-python        make
 rust          make
 zlib
