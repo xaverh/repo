@@ -34,7 +34,7 @@ unset SOTRUSS_NOINDENT
 SOTRUSS_WHICH=$$
 
 # shellcheck disable=2016
-lib='/usr/$LIB/audit/sotruss-lib.so'
+lib='/$LIB/audit/sotruss-lib.so'
 
 # shellcheck disable=2016
 do_help() {
@@ -58,7 +58,7 @@ short options.\n' "$0"
 
 do_missing_arg() {
   printf "%s: option requires an argument -- '%s'
-run '%s --help' or '%s --usage' for more information.\n" "$0" "$1" "$0" "$0" >&2 
+run '%s --help' or '%s --usage' for more information.\n" "$0" "$1" "$0" "$0" >&2
   exit 1
 }
 

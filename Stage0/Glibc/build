@@ -1,19 +1,21 @@
 #!/bin/sh -e
 
 # Build cannot happen without optimizations.
-export CFLAGS="${CFLAGS:--Os}"
+export CFLAGS='-O3 -march=ivybridge -mtune=ivybridge -g2 -m64 -Wl,-z,max-page-size=0x1000 -fPIC -falign-functions=32 -Wa,-mbranches-within-32B-boundaries -gdwarf-4'
+export ASFLAGS='-Wa,-mbranches-within-32B-boundaries'
+export LDFLAGS='-Wl,-z,max-page-size=0x1000 '
 
 # Build must happen outside of glibc source.
 mkdir -p glibc-build
 cd glibc-build
 
 ../configure \
-    --prefix=/usr \
-    --libdir=/usr/lib \
-    --libexecdir=/usr/lib \
+    --prefix=/ \
+    --libdir=/lib \
+    --libexecdir=/lib \
     --enable-bind-now \
     --enable-stack-protector=strong \
-    --disable-nscd \
+    --enable-nscd \
     --disable-profile \
     --disable-werror \
     libc_cv_include_x86_isa_level=no \
@@ -21,10 +23,10 @@ cd glibc-build
     libc_cv_have_x86_movbe=no
 
 printf "%s\n" \
-    "slibdir=/usr/lib" \
-    "rtlddir=/usr/lib" \
-    "sbindir=/usr/bin" \
-    "rootsbindir=/usr/bin" > defconfigparms
+    "slibdir=/lib" \
+    "rtlddir=/lib" \
+    "sbindir=/bin" \
+    "rootsbindir=/bin" > defconfigparms
 
 cp defconfigparms configparms
 echo "build-programs=no" >> configparms
@@ -42,7 +44,7 @@ make DESTDIR="$1" install
 
 rm -f "$1/var/db/Makefile" "$1/etc/ld.so.cache"
 
-mkdir -p "$1/usr/lib/locale"
+mkdir -p "$1/lib/locale"
 printf "en_US.UTF-8 UTF-8\n" > "$1/etc/locale.gen"
 
 cd ..
@@ -53,6 +55,6 @@ cp \
     "$1/etc/"
 
 for script in ldd locale-gen sotruss; do
-    cp -f "sh-alternatives/$script" "$1/usr/bin/$script"
-    chmod +x "$1/usr/bin/$script"
+    cp -f "sh-alternatives/$script" "$1/bin/$script"
+    chmod +x "$1/bin/$script"
 done
