@@ -3,7 +3,7 @@
 export CFLAGS="$CFLAGS -static"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/
 
 make
 make install
