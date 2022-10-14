@@ -1,5 +1,21 @@
 #!/bin/sh -e
 
+cd gcc
+patch -p1 < ../gcc-stable-branch.patch
+patch -p1 < ../0001-Fix-stack-protection-issues.patch
+patch -p1 < ../openmp-vectorize-v2.patch
+patch -p1 < ../fortran-vector-v2.patch
+patch -p1 < ../optimize.patch
+patch -p1 < ../ipa-cp.patch
+patch -p1 < ../gomp-relax.patch
+patch -p1 < ../arch-native-override.patch
+patch -p1 < ../0001-Ignore-Werror-if-GCC_IGNORE_WERROR-environment-varia.patch
+patch -p1 < ../0001-Always-use-z-now-when-linking-with-pie.patch
+patch -p1 < ../tune-inline.patch
+patch -p1 < ../vectorcost.patch
+patch -p1 < ../gcc-hj-latest.patch
+cd ..
+
 # Make sure gmp is built with generic options.
 cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
 cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
@@ -15,10 +31,11 @@ mkdir -p gcc-build
 cd gcc-build
 
 # Grab the system's GCC version.
-gcc_version=$(gcc -dumpfullversion 2>/dev/null) || gcc_version=null
+IFS=. read -r gcc_version _ 2>/dev/null \
+    < "$KISS_ROOT/var/db/kiss/installed/gcc/version" || gcc_version=null
 
 # Skip the bootstrap process if we are able.
-case $2 in "${gcc_version%%.*}"*)
+case $2 in "$gcc_version"*)
     printf '%s\n' "Minor version difference, disabling bootstrap."
     bootstrap=--disable-bootstrap
 esac
@@ -44,15 +61,24 @@ esac
     --enable-shared \
     --enable-threads \
     --enable-tls \
-    --enable-languages=c,c++ \
+    --enable-languages=c,c++,fortran,jit \
     --without-included-gettext \
-    --with-zstd=no \
+    --with-zstd=yes \
     --with-system-zlib \
+    --enable-bootstrap \
+    --with-ppl=yes \
+    --with-isl \
+    --with-arch=ivybridge \
+    --with-tune=ivybridge \
+    --enable-lto \
+    --enable-host-shared \
     --build=x86_64-pc-linux-gnu \
     "${bootstrap:---enable-bootstrap}"
 
+#    --disable-gnu-unique-object \
+
 make
-make DESTDIR="$1" install
+make install
 
 # Save 35MB.
 find "$1" -name libgtkpeer.a  -exec rm -f {} +
@@ -69,3 +95,4 @@ cp -f ../c99 "$1/usr/bin"
     ln -s "/usr/lib/gcc/x86_64-pc-linux-gnu/$2/liblto_plugin.so" \
           "$1/usr/lib/bfd-plugins/liblto_plugin.so"
 }
+
