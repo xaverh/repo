@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export CC="/Programs/Musl/current/bin/musl-gcc -static"
+
+./configure \
+    --prefix=/Programs/Execline/$2
+	--enable-static \
+	--enable-allstatic \
+	--enable-static-libc \
+	--libdir=/Programs/Execline/$2/lib \
+	--with-dynlib=/Programs/Execline/$2/lib \
+	--enable-pedantic-posix
+
+make
+make DESTDIR="$1" install

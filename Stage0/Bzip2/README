@@ -1,11 +1,11 @@
-zstd
+bzip2
 ________________________________________________________________________________
 
-Zstandard (or zstd) is a lossless data compression algorithm developed by
-Yann Collet at Facebook. Zstd is the reference implementation in C. Version 1 of
-this implementation was released as open-source software on 31 August 2016. [0]
+bzip2 is a free and open-source file compression program that uses the
+Burrows–Wheeler algorithm. It only compresses single files and is not a file
+archiver. It is developed by Julian Seward and maintained by Federico Mena. [0]
 
-Upstream: https://github.com/facebook/zstd
+Upstream: https://www.sourceware.org/bzip2/
 
 
 [000] Index
@@ -22,7 +22,7 @@ ________________________________________________________________________________
 
 +------------------------------------------------------------------------------+
 |                                                                              |
-|  $ kiss b zstd                                                               |
+|  $ kiss b bzip2                                                              |
 |                                                                              |
 +------------------------------------------------------------------------------+
 
@@ -30,8 +30,8 @@ ________________________________________________________________________________
 [002] Setup
 ________________________________________________________________________________
 
-To use zstd as the package manager's compression method for build tarballs, set
-the environment variable KISS_COMPRESS to 'zst'. If zstd will not be used as
+To use bzip2 as the package manager's compression method for build tarballs, set
+the environment variable KISS_COMPRESS to 'bz2'. If bzip2 will not be used as
 the package manager's compression method, no such setup is required.
 
 
@@ -44,5 +44,5 @@ Refer to the manual pages and command help output.
 [004] References
 ________________________________________________________________________________
 
-[0] https://en.wikipedia.org/wiki/Zstandard
+[0] https://en.wikipedia.org/wiki/Bzip2
 

@@ -32,3 +32,4 @@ make tooldir=/
 make DESTDIR="$1" tooldir=/ install
 
 ln -sf ld.bfd "$1/bin/ld"
+

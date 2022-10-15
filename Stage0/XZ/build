@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/ \
+    --disable-xz \
+    --disable-doc \
+    --disable-nls \
+    --disable-xzdec \
+    --disable-shared \
+    --disable-lzmadec \
+    --disable-scripts \
+    --disable-lzmainfo \
+    --disable-lzma-links
+
+make
+make install
+
+# Delete empty directory
+rmdir "$1/bin"

@@ -4,28 +4,28 @@ make CC="$CC $CFLAGS -fPIC $LDFLAGS" -f Makefile-libbz2_so
 make CC="$CC $CFLAGS -static -fPIC $LDFLAGS" bzip2
 
 mkdir -p \
-    "$1/usr/bin" \
-    "$1/usr/lib" \
-    "$1/usr/share/man/man1" \
-    "$1/usr/include"
+    "$1/bin" \
+    "$1/lib" \
+    "$1/share/man/man1" \
+    "$1/include"
 
 cp -f \
     bzip2 \
     bzdiff \
     bzgrep \
     bzmore \
-    "$1/usr/bin"
+    "$1/bin"
 
 cp -f \
     libbz2.so.1.0.8 \
     libbz2.a \
-    "$1/usr/lib"
+    "$1/lib"
 
-cp -f bzip2.1 "$1/usr/share/man/man1"
-cp -f bzlib.h "$1/usr/include"
+cp -f bzip2.1 "$1/share/man/man1"
+cp -f bzlib.h "$1/include"
 
-ln -sf libbz2.so.1.0.8 "$1/usr/lib/libbz2.so"
-ln -sf libbz2.so.1.0.8 "$1/usr/lib/libbz2.so.1"
-ln -sf libbz2.so.1.0.8 "$1/usr/lib/libbz2.so.1.0"
-ln -sf bzip2 "$1/usr/bin/bunzip2"
-ln -sf bzip2 "$1/usr/bin/bzcat"
+ln -sf libbz2.so.1.0.8 "$1/lib/libbz2.so"
+ln -sf libbz2.so.1.0.8 "$1/lib/libbz2.so.1"
+ln -sf libbz2.so.1.0.8 "$1/lib/libbz2.so.1.0"
+ln -sf bzip2 "$1/bin/bunzip2"
+ln -sf bzip2 "$1/bin/bzcat"

@@ -1,0 +1,10 @@
+Packages
+
+1. Baselayout
+2. ?Kiss
+3? GLibc
+4? Busybox
+5? GCC
+
+[TODO] cf. install order from Sabotage Linux and KISS Linux mkrootfs
+

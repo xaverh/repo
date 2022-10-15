@@ -5,11 +5,6 @@ export CFLAGS_FOR_TARGET="-march=ivybridge -g1 -O3 -fstack-protector -Wl,-z -Wl,
 export CXXFLAGS="-march=ivybridge -g1 -O3 -Wl,-z,max-page-size=0x1000 -fPIC"
 export CXXFLAGS_FOR_TARGET="-march=ivybridge -g1 -O3 -Wl,-z,max-page-size=0x1000 -fPIC"
 
-export CFLAGS="-march=ivybridge -O3"
-export CFLAGS_FOR_TARGET="-march=ivybridge -O3"
-export CXXFLAGS="-march=ivybridge -O3"
-export CXXFLAGS_FOR_TARGET="-march=ivybridge -O3"
-
 # Make sure gmp is built with generic options.
 cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
 cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
@@ -26,17 +21,15 @@ cd gcc-build
 
 # Grab the system's GCC version.
 # gcc_version=$(gcc -dumpfullversion 2>/dev/null) || gcc_version=null
-# Skip the bootstrap process if we are able.
+
+# # Skip the bootstrap process if we are able.
 # case $2 in "${gcc_version%%.*}"*)
 #     printf '%s\n' "Minor version difference, disabling bootstrap."
 #     bootstrap=--disable-bootstrap
 # esac
 
 ../gcc/configure \
-    --prefix=/ \
-    --libexecdir=/lib \
-    --mandir=/share/man \
-    --infodir=/share/info \
+    --prefix=/Programs/GCC/$2 \
     --disable-multilib \
     --disable-symvers \
     --disable-libmpx \
@@ -44,7 +37,7 @@ cd gcc-build
     --disable-libsanitizer \
     --disable-werror \
     --disable-fixed-point \
-    --disable-libstdcxx-pch \
+    --enable-libstdcxx-pch \
     --disable-nls \
     --enable-checking=release \
     --enable-__cxa_atexit \
@@ -53,28 +46,33 @@ cd gcc-build
     --enable-shared \
     --enable-threads \
     --enable-tls \
-    --enable-languages=c,c++ \
+    --enable-languages=c,c++,fortran,jit --enable-host-shared \
     --without-included-gettext \
-    --with-zstd=no \
+    --with-zstd=yes \
+    --with-isl=yes \
     --with-system-zlib \
     --build=x86_64-pc-linux-gnu \
     "${bootstrap:---enable-bootstrap}"
 
+    # --libexecdir=/usr/lib \
+    # --mandir=/share/man \
+    # --infodir=/share/info \
+
 make
 make install
 
-# Save 35MB.
-find "$1" -name libgtkpeer.a  -exec rm -f {} +
-find "$1" -name libgjsmalsa.a -exec rm -f {} +
-find "$1" -name libgij.a      -exec rm -f {} +
+# # Save 35MB.
+# find "$1" -name libgtkpeer.a  -exec rm -f {} +
+# find "$1" -name libgjsmalsa.a -exec rm -f {} +
+# find "$1" -name libgij.a      -exec rm -f {} +
 
-ln -sf gcc "$1/bin/cc"
-cp -f ../c99 "$1/bin"
+ln -sf gcc "$1/Programs/GCC/$2/bin/cc"
+cp -f ../c99 "$1/Programs/GCC/$2/bin"
 
 # Symlink for LTO.
 {
-    mkdir -p "$1/lib/bfd-plugins"
+    mkdir -p "$1/Programs/GCC/$2/lib/bfd-plugins"
 
-    ln -s "/lib/gcc/x86_64-pc-linux-gnu/$2/liblto_plugin.so" \
-          "$1/lib/bfd-plugins/liblto_plugin.so"
+    ln -s "/Programs/GCC/$2/lib/gcc/x86_64-pc-linux-gnu/$2/liblto_plugin.so" \
+          "$1/Programs/GCC/$2/lib/bfd-plugins/liblto_plugin.so"
 }

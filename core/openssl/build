@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
+# config requires Perl
+# ./config --prefix=/
+
 make depend
 make
 
-make \
+make DESTDIR="$1" \
     install_sw \
     install_ssldirs \
     install_man_docs

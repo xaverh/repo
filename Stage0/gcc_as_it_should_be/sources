@@ -1,0 +1,16 @@
+https://gcc.gnu.org/pub/gcc/releases/gcc-VERSION/gcc-VERSION.tar.xz gcc
+https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz gcc/gmp
+https://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz gcc/mpfr
+https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz gcc/mpc
+https://gcc.gnu.org/pub/gcc/infrastructure/isl-0.24.tar.bz2 gcc/isl
+files/c99
+patches/gcc-stable-branch.patch
+patches/optimize.patch
+patches/vectorize.patch
+patches/gomp-relax.patch
+patches/avx512-when-we-ask-for-it.patch
+patches/arch-native-override.patch
+patches/0001-Ignore-Werror-if-GCC_IGNORE_WERROR-environment-varia.patch
+patches/0001-Always-use-z-now-when-linking-with-pie.patch
+patches/tune-inline.patch
+patches/x86-always-generate-branch-hint.patch

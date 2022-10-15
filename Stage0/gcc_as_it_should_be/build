@@ -1,0 +1,108 @@
+#!/bin/sh -e
+
+cd gcc
+patch -p1 < ../gcc-stable-branch.patch
+patch -p1 < ../optimize.patch
+patch -p1 < ../vectorize.patch
+patch -p1 < ../gomp-relax.patch
+patch -p1 < ../avx512-when-we-ask-for-it.patch
+patch -p1 < ../arch-native-override.patch
+patch -p1 < ../0001-Ignore-Werror-if-GCC_IGNORE_WERROR-environment-varia.patch
+patch -p1 < ../0001-Always-use-z-now-when-linking-with-pie.patch
+patch -p1 < ../tune-inline.patch
+patch -p1 < ../x86-always-generate-branch-hint.patch
+cd ..
+
+# Make sure gmp is built with generic options.
+cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
+cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
+
+# Use lib not lib64 by default.
+sed '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64 > _
+mv -f _ gcc/gcc/config/i386/t-linux64
+sed 's/lib64/lib/' gcc/gcc/config/i386/linux64.h > _
+mv -f _ gcc/gcc/config/i386/linux64.h
+
+# Build must happen outside of gcc source.
+mkdir -p gcc-build
+cd gcc-build
+
+# # Grab the system's GCC version.
+# IFS=. read -r gcc_version _ 2>/dev/null \
+#     < "$KISS_ROOT/var/db/kiss/installed/gcc/version" || gcc_version=null
+
+# # Skip the bootstrap process if we are able.
+# case $2 in "$gcc_version"*)
+#     printf '%s\n' "Minor version difference, disabling bootstrap."
+#     bootstrap=--disable-bootstrap
+# esac
+
+export CFLAGS="-march=ivybridge -g1 -O3 -fstack-protector -Wl,-z -Wl,now -Wl,-z -Wl,relro  -Wl,-z,max-page-size=0x1000 -fPIC -falign-functions=32"
+export CXXFLAGS="-march=ivybridge -g1 -O3  -Wl,-z,max-page-size=0x1000 -fPIC"
+export CFLAGS_FOR_TARGET="$CFLAGS"
+export CXXFLAGS_FOR_TARGET="$CXXFLAGS"
+export CFLAGS=
+export CXXFLAGS=
+export CFLAGS_FOR_TARGET=
+export CXXFLAGS_FOR_TARGET=
+export CPATH=/include
+export LIBRARY_PATH=/lib
+
+../gcc/configure \
+    --prefix=/ \
+    --exec-prefix=/ \
+    --libdir=/ \
+    --libexecdir=/lib \
+    --mandir=/share/man \
+    --infodir=/share/info \
+    --includedir=/include \
+    --disable-multilib \
+    --disable-symvers \
+    --disable-libmpx \
+    --disable-libmudflap \
+    --disable-libsanitizer \
+    --disable-werror \
+    --disable-fixed-point \
+    --disable-libstdcxx-pch \
+    --disable-nls \
+    --enable-checking=release \
+    --enable-__cxa_atexit \
+    --enable-default-pie \
+    --enable-default-ssp \
+    --enable-shared \
+    --enable-threads \
+    --enable-tls \
+    --enable-languages=c,c++,fortran,jit \
+    --without-included-gettext \
+    --with-zstd=no \
+    --with-system-zlib \
+    --with-ppl=yes \
+    --with-pic \
+    --with-isl \
+    --with-arch=ivybridge \
+    --with-tune=ivybridge \
+    --enable-host-shared \
+    --build=x86_64-pc-linux-gnu \
+    "${bootstrap:---enable-bootstrap}"
+
+    # --enable-lto \
+#    --disable-gnu-unique-object \
+
+make
+make install
+
+# Save 35MB.
+find "$1" -name libgtkpeer.a  -exec rm -f {} +
+find "$1" -name libgjsmalsa.a -exec rm -f {} +
+find "$1" -name libgij.a      -exec rm -f {} +
+
+ln -sf gcc "$1/bin/cc"
+cp -f ../c99 "$1/bin"
+
+# Symlink for LTO.
+{
+    mkdir -p "$1/lib/bfd-plugins"
+
+    ln -s "/lib/gcc/x86_64-pc-linux-gnu/$2/liblto_plugin.so" \
+          "$1/lib/bfd-plugins/liblto_plugin.so"
+}

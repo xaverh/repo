@@ -1,0 +1,75 @@
+/
+├── Data                     - for resources belonging to the system and to individual programs
+|   ├╳~ Kiss                 - sources, recipes and other files used by the Compile tool
+|   |   ├─? Cache
+|   |   ├─? Archives
+|   |   ├─? LocalRecipes
+|   |   ├─~ PackedRecipes    ~ ~/.cache/kiss/bin   [todo] rename to Theory?
+|   |   ├── Repo             ~ /var/db/kiss/repo
+|   |   |   ├── Stage0       - Packages required for an initial chroot that can rebuild itself, e.g. Busybox, GCC
+|   |   |   ├── Metal        - Packages required for deployment on actual hardware, e.g. Linux, IWD
+|   |   |   ╰─~ Bloat        - Packages required for leisure, e.g. yt-dlp
+|   |   ╰── Sources          ~ ~/.cache/kiss/sources
+|   ╰── Variable             ~ /var
+|       ├── cache            ~ /var/cache
+|       ├── empty            ~ /var/empty
+|       ├── lib              ~ /var/lib
+|       ├── lock             ~ /var/lock
+|       ├── log              ~ /var/log
+|       ├── run              ~ /var/run
+|       ├── spool            ~ /var/spool
+|       ╰── tmp              ~ /var/tmp + /tmp
+├─~ Mount                    ~ /mnt + /media - [todo] rename to media?
+├── Programs                 ~ /opt
+├── System
+|   ├─? Aliens               ? files managed by programming language package managers
+|   ├── Environment          - links to program files declaring environment variables
+|   ├── Index                - links to files in each program's
+|   |   ├── bin                  + bin/ and sbin/ directories
+|   |   ├── include              + include/ directory
+|   |   ├── lib                  + lib/ directory
+|   |   ╰── share                + share/ directory
+|   |       ├~? consolefonts
+|   |       ├─╳ fonts
+|   |       ╰── man
+|   |            ╰── man{1-9}    + man{1-9}/ directories
+|   ├── Kernel
+|   |   ├── Boot             ~ /boot
+|   |   ├── Devices          ~ /dev
+|   |   ├╳? Modules          - loadable kernel modules (device drivers)
+|   |   ├── Objects          ~ /sys
+|   |   ╰── Status           ~ /proc
+|   ├── Settings             ~ /etc
+|   |   ╰─~ BootScripts      ? scripts used for boot, symlink to /Programs/BootScripts/Settings/BootScripts/
+|   ╰─? Tasks                ? links to programs' boot tasks (from their Resources/Tasks/ directory)
+├── Users                    ~ /home + /root
+╎
+╎
+╎╌╌ etc     -> System/Settings
+╎╌╌ dev     -> System/Kernel/Devices
+╎╌╌ sys     -> System/Kernel/Objects
+╎╌╌ proc    -> System/Kernel/Status
+╎╌╌ var     -> System/Variable
+╎╌╌ tmp     -> System/Variable/tmp
+╎╌╌ run     -> System/Variable/run
+╎╌╌ sbin    -> System/Index/bin
+╎╌╌ bin     -> System/Index/bin
+╎╌╌ include -> System/Index/include
+╎╌╌ lib     -> System/Index/lib
+╎╌╌ lib64   -> System/Index/lib
+╎╌╌ share   -> System/Index/share
+╎╌╌ local   -> .
+╰╌╌ usr     -> .
+
+Key:
+? 1st col.: [FAIL]  brauchen wir das?
+? 2nd col.: [TRACE] Was genau passiert da?
+~ 1st col.: [TODO]  rename
+~ 2nd col.:         corresponds to
+╳ 1st col.: packages create this iff needed
+
+built on ideas and code by
+- Leah Neukirchen, Ada Worcester, et al. (Sabotage)
+- Dylan Araps (KISS Linux)
+- Anselm Garbe (suckless, sta.li)
+- Hisham Muhamad et al. (GoboLinux)
