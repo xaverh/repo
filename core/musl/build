@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Flags from Clear Linux*.
+export CFLAGS="-march=native -g -O3 -feliminate-unused-debug-types -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -Wformat -Wformat-security -m64 -fasynchronous-unwind-tables -Wp,-D_REENTRANT -ftree-loop-distribute-patterns -Wl,-z -Wl,now -Wl,-z -Wl,relro -fno-semantic-interposition -ffat-lto-objects -fno-trapping-math -Wl,-sort-common -Wl,--enable-new-dtags -mrelax-cmpxchg-loop -fno-lto "
+
 # Uncomment if using valgrind or similar.
 # :>nostrip
 
@@ -25,3 +28,5 @@ cp -f cdefs.h queue.h tree.h \
 # Install getconf.
 cc getconf.c -o "$1/usr/bin/getconf"
 cc getent.c  -o "$1/usr/bin/getent"
+
+
