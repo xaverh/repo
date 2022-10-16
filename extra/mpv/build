@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 # Setup docutils to generate manual pages.
 {
     cd docutils
@@ -17,13 +19,14 @@
     export PYTHONPATH
 }
 
-meson \
-    --prefix=/usr \
+meson setup \
+    -Dprefix=/usr \
+    -Dmandir=/usr/share/man \
     -Dalsa=enabled \
     -Dlibmpv=true \
-    -Dwayland=enabled \
-    -Dx11=disabled \
-    . output
+    -Dwayland=disabled \
+    -Dx11=enabled \
+    output
 
 ninja -C output
 ninja -C output install

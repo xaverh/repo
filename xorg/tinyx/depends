@@ -1,0 +1,9 @@
+autoconf make
+freetype-harfbuzz
+libXdmcp
+libXfont
+libXtst
+libfontenc
+libpng
+libtool make
+xtrans

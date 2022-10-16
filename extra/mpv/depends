@@ -1,11 +1,16 @@
 alsa-lib
 ffmpeg
+freetype-harfbuzz
+libXScrnSaver
+libXext
+libXinerama
+libXpresent
+libXrandr
 libass
+libva
 libxkbcommon
 linux-headers make
 mesa
-meson   make
+meson make
 pkgconf make
 python  make
-wayland
-wayland-protocols make
