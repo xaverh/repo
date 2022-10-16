@@ -2,7 +2,11 @@ pipeline:
   build:
     image: alpine
     when:
+<<<<<<< HEAD
       branch: [ master ]
+=======
+      branch: [ main ]
+>>>>>>> community/main
     commands: |
       apk add --no-cache shellcheck
 

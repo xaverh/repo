@@ -1,0 +1,30 @@
+#!/bin/sh -e
+# CFLAGS must expand to individual arguments.
+# shellcheck disable=2086
+
+# The iw package is built statically using libnl-tiny which
+# is a minimal version of libnl maintained by OpenWRT.
+tar xf libnl-tiny*tgz
+mv libnl-tiny*/ libnl
+
+(
+    cd libnl
+
+    echo $CC $CFLAGS -I./include $CPPFLAGS -c ./*.c
+    $CC $CFLAGS -I./include $CPPFLAGS -c ./*.c
+    echo $AR rc libnl-tiny.a -- *.o
+    $AR rc libnl-tiny.a -- *.o
+)
+
+# Don't bother compressing tiny man page.
+sed 's@\(iw\.8\)\.gz@\1@' Makefile > _
+mv -f _ Makefile
+
+export CFLAGS="$CFLAGS -I./libnl/include -DCONFIG_LIBNL20 -D_GNU_SOURCE"
+export LDFLAGS="$LDFLAGS -L./libnl -static"
+
+make \
+    SBINDIR=/usr/bin \
+    NO_PKG_CONFIG=Y \
+    LIBS=-lnl-tiny \
+    install

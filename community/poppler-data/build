@@ -1,6 +1,3 @@
 #!/bin/sh -e
 
-export DESTDIR="$1"
-
-
-make prefix=/usr install
+make prefix=/usr DESTDIR="$1" install
