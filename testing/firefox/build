@@ -15,10 +15,6 @@ esac
 export CFLAGS="$CFLAGS -w"
 export CXXFLAGS="$CXXFLAGS -w"
 
-# Instruct the compiler to trim absolute paths in resulting binaries and instead
-# change them to relative paths ($PWD/... ./...).
-export RUSTFLAGS="$RUSTFLAGS --remap-path-prefix=$PWD=."
-
 export LDFLAGS="$LDFLAGS -Wl,-rpath=/usr/lib/firefox,--enable-new-dtags"
 export RUSTFLAGS="$RUSTFLAGS -Cdebuginfo=0"
 export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
@@ -38,6 +34,7 @@ ac_add_options --enable-install-strip
 ac_add_options --enable-official-branding
 ac_add_options --enable-application=browser
 ac_add_options --enable-optimize
+ac_add_options --enable-path-remapping=c,rust
 ac_add_options --with-system-ffi
 ac_add_options --with-system-jpeg
 ac_add_options --with-system-libvpx
