@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-allstatic \
+    --enable-static-libc \
+    --libexecdir=/usr/lib
+
+make
+make DESTDIR="$1" install
+
+# Install manual pages.
+(
+    cd man
+
+    export MANPATH="$1/usr/share/man"
+
+    make
+    make install
+)
