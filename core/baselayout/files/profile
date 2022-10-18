@@ -6,7 +6,7 @@
 export PATH=/usr/local/bin:/usr/bin
 
 # Set KISS defaults.
-export KISS_PATH=/var/db/kiss/repo/core:/var/db/kiss/repo/extra:/var/db/kiss/repo/xorg:/var/db/kiss/repo/community
+export KISS_PATH=/var/db/kiss/repo/core:/var/db/kiss/repo/metal:/var/db/kiss/repo/extra:/var/db/kiss/repo/xorg:/var/db/kiss/repo/community
 export KISS_HOOK=/etc/kiss_hook.sh
 
 # Set default umask.
