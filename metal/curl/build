@@ -22,7 +22,7 @@ mv -f _ src/Makefile.in
     --without-libpsl \
     --without-libidn2 \
     --without-brotli \
-    --without-zstd
+    --with-zstd
 
 make
 make install
