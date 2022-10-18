@@ -4,9 +4,8 @@
     --prefix=/usr \
     --bindir=/usr/bin \
     --disable-documentation \
-    --disable-backtrace \
-    --disable-zstd \
-    --disable-libudev
+    --disable-backtrace
+    # --disable-libudev
 
 make
 make DESTDIR="$1" install

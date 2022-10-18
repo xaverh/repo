@@ -16,6 +16,7 @@ case $1 in
                     "$3/usr/share/info" \
                     "$3/usr/share/doc" \
                     "$3/usr/lib/charset.alias" \
+                    "$3/usr/share/bash-completion" \
                     "$3"/etc/profile.d/*.csh
             ;;
         esac
