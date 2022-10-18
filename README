@@ -3,7 +3,6 @@
 ________________________________________________________________________________
 
 
-<<<<<<< HEAD
 Unofficial Main Repository
 ________________________________________________________________________________
 
@@ -22,7 +21,6 @@ ________________________________________________________________________________
 $ cd /path/to/repo
 $ git config gpg.ssh.allowedSignersFile .allowed_signers
 $ git config merge.verifySignatures true
-=======
 Community Repository
 ________________________________________________________________________________
 
@@ -90,4 +88,3 @@ Contributions to this repository should adhere to the following commit style.
 |   $ git commit -m "pkg_name: fixed build failure ..."                        |
 |                                                                              |
 +------------------------------------------------------------------------------+
->>>>>>> community/main
