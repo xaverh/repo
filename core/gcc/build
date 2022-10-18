@@ -1,5 +1,10 @@
 #!/bin/sh -e
 
+export CFLAGS="-march=ivybridge -g1 -O3 -fstack-protector -Wl,-z -Wl,now -Wl,-z -Wl,relro -Wl,-z,max-page-size=0x1000 -fPIC"
+export CFLAGS_FOR_TARGET="-march=ivybridge -g1 -O3 -fstack-protector -Wl,-z -Wl,now -Wl,-z -Wl,relro -Wl,-z,max-page-size=0x1000 -fPIC"
+export CXXFLAGS="-march=ivybridge -g1 -O3 -Wl,-z,max-page-size=0x1000 -fPIC"
+export CXXFLAGS_FOR_TARGET="-march=ivybridge -g1 -O3 -Wl,-z,max-page-size=0x1000 -fPIC"
+
 # Make sure gmp is built with generic options.
 cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
 cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
@@ -36,7 +41,7 @@ esac
     --disable-libsanitizer \
     --disable-werror \
     --disable-fixed-point \
-    --disable-libstdcxx-pch \
+    --enable-libstdcxx-pch \
     --disable-nls \
     --enable-checking=release \
     --enable-__cxa_atexit \
@@ -45,21 +50,22 @@ esac
     --enable-shared \
     --enable-threads \
     --enable-tls \
-    --enable-initfini-array \
-    --enable-languages=c,c++ \
     --without-included-gettext \
-    --with-zstd=no \
+    --with-zstd=yes \
+    --with-isl=yes \
     --with-system-zlib \
+    --enable-languages=c,c++,fortran,jit --enable-host-shared \
+    --enable-lto --with-pic \
     --build=x86_64-pc-linux-musl \
     "${bootstrap:---enable-bootstrap}"
 
 make
 make install
 
-# Save 35MB.
-find "$1" -name libgtkpeer.a  -exec rm -f {} +
-find "$1" -name libgjsmalsa.a -exec rm -f {} +
-find "$1" -name libgij.a      -exec rm -f {} +
+# # Save 35MB.
+# find "$1" -name libgtkpeer.a  -exec rm -f {} +
+# find "$1" -name libgjsmalsa.a -exec rm -f {} +
+# find "$1" -name libgij.a      -exec rm -f {} +
 
 ln -sf gcc "$1/usr/bin/cc"
 cp -f ../c99 "$1/usr/bin"
