@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --with-default-path=/usr/bin \
+    --disable-shared \
+    --enable-allstatic \
+    --enable-static-libc
+
+make
+make DESTDIR="$1" install
