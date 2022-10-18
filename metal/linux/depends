@@ -1,0 +1,8 @@
+bison    make
+flex     make
+git      make
+libelf   make
+m4       make
+make     make
+python   make
+zstd     make

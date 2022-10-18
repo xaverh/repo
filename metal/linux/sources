@@ -1,0 +1,14 @@
+https://cdn.kernel.org/pub/linux/kernel/vMAJOR.x/linux-VERSION.tar.xz
+git+https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git firmware/linux-firmware
+git+https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git firmware/regdb
+git+https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files firmware/microcode
+files/andermatt-modprobed.db
+files/clear.config.fragment
+files/localyesconfig.config.fragment
+files/manual-changes.config.fragment
+files/firmware.config.fragment
+files/cmdline.config.fragment
+files/iwd.config.fragment
+patches/no-perl.patch
+patches/o2_n.patch
+patches/wireless-regdb-xh.patch

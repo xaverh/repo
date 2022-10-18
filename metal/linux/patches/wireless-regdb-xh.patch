@@ -1,0 +1,34 @@
+From 6decc20a102b7461efde8328559ed7176b2b88d6 Mon Sep 17 00:00:00 2001
+From: Xaver Hellauer <xaver.hellauer@gmail.com>
+Date: Sun, 19 Dec 2021 02:58:38 +0100
+Subject: [PATCH] xh
+
+---
+ db.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/db.txt b/db.txt
+index b898799..dabf629 100644
+--- a/db.txt
++++ b/db.txt
+@@ -1677,6 +1677,17 @@ country WS: DFS-ETSI
+ 	(5250 - 5330 @ 40), (20), DFS
+ 	(5490 - 5710 @ 40), (27), DFS
+ 
++country XH:
++	(2402 - 2482 @ 40), (30)
++	(2474 - 2494 @ 20), (30), NO-OFDM
++	(4910 - 4990 @ 40), (30)
++	(5030 - 5090 @ 40), (30)
++	(5150 - 5250 @ 80), (30)
++	(5250 - 5350 @ 80), (30), DFS
++	(5470 - 5725 @ 160), (30), DFS
++	(5725 - 5875 @ 80), (30)
++	(57000 - 66000 @ 2160), (44)
++
+ country YE:
+ 	(2402 - 2482 @ 40), (20)
+ 
+-- 
+2.34.1
+
