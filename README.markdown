@@ -14,3 +14,4 @@
   - linux-headers
   - patch
   - glibc
+  - zlib
