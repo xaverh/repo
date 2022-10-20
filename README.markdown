@@ -16,3 +16,12 @@
   - glibc
   - zlib
   - bzip2
+  
+  
+  
+  
+  
+# Backlog
+
+- [TODO] why no zopfli in pigz?
+
