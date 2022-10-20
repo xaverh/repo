@@ -20,6 +20,7 @@
   - xz
   - zstd
   - m4
+  - flex
   
   
 # Backlog
