@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+current="$(s6-uniquename /usr/lib/s6-linux-init/current)"
+printf '\033[32;1m=>\033[m Installing init system to %s.\n' "$current"
+
+s6-linux-init-maker \
+    -c /usr/lib/s6-linux-init/current \
+    -1 \
+    -G  "/usr/bin/getty 38400 tty3" \
+    -p /usr/bin \
+	"$current"
+
+s6-ln -sfn $(s6-basename "$current") /usr/lib/s6-linux-init/current
+printf '\033[32;1m=>\033[m Linking /usr/lib/s6-linux-init/current to %s.\n' "$(s6-basename -n $(s6-linkname -n /usr/lib/s6-linux-init/current))"

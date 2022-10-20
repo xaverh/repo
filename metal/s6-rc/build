@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --enable-allstatic \
+    --enable-static-libc
+
+make
+make DESTDIR="$1" install

@@ -1,0 +1,29 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --enable-allstatic \
+    --enable-static-libc \
+    --skeldir=/usr/share/s6-linux-init/skel \
+    --enable-absolute-paths
+
+make
+make DESTDIR="$1" install
+
+cp -f rc.init rc.shutdown rc.shutdown.final runlevel "$1/usr/share/s6-linux-init/skel"
+
+mkdir -p "$1/usr/lib/s6-linux-init"
+
+"$1/usr/bin/s6-linux-init-maker" \
+    -f "$1/usr/share/s6-linux-init/skel" \
+    -c /usr/lib/s6-linux-init/current \
+    -1 \
+    -G  "/usr/bin/getty 38400 tty3" \
+    -p /usr/bin \
+    current
+
+# This is done here to use the alternative system.
+for file in halt poweroff reboot shutdown telinit; do
+    cp -a "current/bin/$file" "$1/usr/bin/"
+done

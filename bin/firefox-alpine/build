@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+:> nostrip
+
+mkdir -p "$1/usr"
+mv lib bin share "$1/usr"
+

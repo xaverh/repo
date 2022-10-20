@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+export GCC_IGNORE_WERROR=1
+export CFLAGS="-march=ivybridge -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="-march=ivybridge -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="-march=ivybridge -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="-march=ivybridge -O3 -ffat-lto-objects -flto=4 "
+
 export DESTDIR="$1"
 
 TMPDIR="$1/tmp"

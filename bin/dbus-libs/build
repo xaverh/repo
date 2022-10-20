@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -flto=auto "
+
+./configure \
+	--prefix=/usr \
+	--localstatedir=/var \
+	--sysconfdir=/etc \
+	--with-system-pid-file=/run/dbus/dbus.pid
+make
+
+make DESTDIR="$1" install
+
+rm -rf "$1/etc"
+rm -rf "$1/usr/bin"
+rm -rf "$1/var/run"
+rm -rf "$1/var/lib"
+rm -rf "$1/usr/libexec"
+rm -rf "$1/usr/share/doc"
+rm -rf "$1/usr/share/dbus-1"
+

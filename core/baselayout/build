@@ -30,7 +30,6 @@ mkdir -m 755 \
     "$1/var/lib" \
     "$1/var/lib/misc" \
     "$1/var/empty" \
-    "$1/var/service" \
     "$1/var/spool"
 
 mkdir -m 555 \

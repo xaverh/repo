@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --sysconfdir=/etc
+
+make
+make install
+
+echo 'name_servers="2606:4700:4700::1111 1.1.1.1 2606:4700:4700::1001 1.0.0.1"' >> "$1/etc/resolvconf.conf"

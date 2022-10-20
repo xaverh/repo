@@ -8,10 +8,5 @@ patches/print-unicode.patch patch
 patches/install-fix-chown.patch patch
 patches/lsusb-vendor-product.patch patch
 patches/unzip-usage-no-error.patch patch
-patches/init-use-baseinit.patch patch
 files/.config
 files/.config-suid
-files/acpid.run
-files/crond.run
-files/syslogd.run
-files/ntpd.run

@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+sed -i 's@^PREFIX.*@PREFIX=/usr/@g' mk.config
+sed -i 's@^BINDIR.*@BINDIR=/usr/bin@g' mk.config
+sed -i 's@^LIBDIR.*@LIBDIR=/usr/lib@g' mk.config
+sed -i 's@^PUBDIR.*@PUBDIR=/usr/lib/doctools/pub@g' mk.config
+sed -i 's@^MANDIR.*@MANDIR=/usr/share/man@g' mk.config
+sed -i 's@^MACDIR.*@MACDIR=/usr/lib/doctools/tmac@g' mk.config
+sed -i 's@^FNTDIR.*@FNTDIR=/usr/lib/doctools/font@g' mk.config
+sed -i 's@^PSTDIR.*@PSTDIR=/usr/lib/doctools/font/devpost/postscript@g' mk.config
+sed -i 's@^TABDIR.*@TABDIR=/usr/lib/doctools/nterm@g' mk.config
+sed -i 's@^HYPDIR.*@HYPDIR=/usr/lib/doctools/hyphen@g' mk.config
+sed -i 's@^REFDIR.*@REFDIR=/usr/lib/reftools@g' mk.config
+# https://github.com/n-t-roff/heirloom-doctools/commit/8f9fc8
+sed -i 's@/second part of user declarations/ {@/^#ifdef YYTYPE_UINT8$/ {@' eqn/yyval.sed
+
+make
+make install ROOT="$1" install

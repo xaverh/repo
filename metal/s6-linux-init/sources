@@ -1,0 +1,5 @@
+https://www.skarnet.org/software/PACKAGE/PACKAGE-VERSION.tar.gz
+files/rc.init
+files/rc.shutdown
+files/rc.shutdown.final
+files/runlevel

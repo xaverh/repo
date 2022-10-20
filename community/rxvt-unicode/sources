@@ -1,3 +1,4 @@
-http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-VERSION.tar.bz2
+http://dist.schmorp.de/PACKAGE/PACKAGE-VERSION.tar.bz2
 patches/gentables.patch
-patches/rxvt-unicode-kerning.patch
+patches/enable-wide-glyphs.patch
+patches/improve-font-rendering.patch

@@ -1,0 +1,5 @@
+#!/bin/execlineb -P
+# Things to do before hardware halt/reboot/poweroff.
+# Ideally, it should be a single call to the service manager,
+# telling it to bring all the services down.
+s6-rc -v2 -bDa change

@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+./bootstrap.sh
+./configure --prefix=/usr
+
+make
+make install DESTDIR="$1"
+

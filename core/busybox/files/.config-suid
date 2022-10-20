@@ -49,10 +49,10 @@ CONFIG_STATIC=y
 # CONFIG_FEATURE_SHARED_BUSYBOX is not set
 CONFIG_CROSS_COMPILER_PREFIX=""
 CONFIG_SYSROOT=""
-CONFIG_EXTRA_CFLAGS=""
+CONFIG_EXTRA_CFLAGS="-O3 -march=native -mtune=native -pipe -fno-plt -fstack-clash-protection -fcf-protection -mfpmath=both -funroll-loops -fipa-pta -ftracer -malign-data=cacheline -Wl,--hash-style=gnu -fno-strict-aliasing"
 CONFIG_EXTRA_LDFLAGS=""
 CONFIG_EXTRA_LDLIBS=""
-CONFIG_USE_PORTABLE_CODE=y
+# CONFIG_USE_PORTABLE_CODE is not set
 # CONFIG_STACK_OPTIMIZATION_386 is not set
 CONFIG_STATIC_LIBGCC=y
 
