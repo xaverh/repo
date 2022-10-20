@@ -21,6 +21,8 @@
   - zstd
   - m4
   - flex
+  - bison
+  - binutils
   
   
 # Backlog
