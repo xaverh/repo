@@ -16,6 +16,7 @@
   - glibc
   - zlib
   - bzip2
+  - xz
   
   
   
