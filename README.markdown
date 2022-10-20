@@ -19,6 +19,7 @@
   - lz4
   - xz
   - zstd
+  - m4
   
   
 # Backlog
