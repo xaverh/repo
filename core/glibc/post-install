@@ -1,4 +1,5 @@
 #!/bin/sh -e
 
+mkdir -p /var/cache/locale/
 ldconfig
 locale-gen

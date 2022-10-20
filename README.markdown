@@ -7,4 +7,10 @@
   - baselayout
   - certs
   - gawk
-  
+  - expat
+  - libffi
+  - sqlite
+  - python
+  - linux-headers
+  - patch
+  - glibc

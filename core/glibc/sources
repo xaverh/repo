@@ -1,4 +1,28 @@
-https://github.com/bminor/glibc/archive/3e279192749cfcae4ceebb1f21a3275e677d0561.tar.gz
+https://mirrors.kernel.org/gnu/PACKAGE/PACKAGE-VERSION.tar.gz
 files/ldd sh-alternatives/
 files/locale-gen sh-alternatives/
 files/sotruss sh-alternatives/
+patches/glibc-stable-branch.patch
+patches/0001-Set-host.conf-multi-to-on-by-default.patch
+patches/0001-sysdeps-unix-Add-support-for-usr-lib32-as-a-system-l.patch
+patches/ld-so-cache-in-var.patch
+patches/mkdir-ldconfig.patch
+patches/locale-var-cache.patch
+patches/nonscd.patch
+patches/alternate_trim.patch
+patches/tzselect-proper-zone-file.patch
+patches/malloc_tune.patch
+patches/0001-misc-Support-fallback-stateless-shells-path-in-absen.patch
+patches/stateless.patch
+patches/mathlto.patch
+patches/vzeroupper-2.27.patch
+patches/pause.patch
+patches/nostackshrink.patch
+patches/0001-Set-vector-width-and-alignment-to-fix-GCC-AVX-issue.patch
+patches/disable-vectorization-even-more.patch
+patches/0001-Force-ffsll-to-be-64-bytes-aligned.patch
+patches/utf8-locale-naming.patch
+patches/noclone3yet.patch
+patches/seccomp_workaround.patch
+patches/reenable_DT_HASH.patch
+patches/nsswitch.patch

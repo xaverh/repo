@@ -1,7 +1,36 @@
 #!/bin/sh -e
 
 # Build cannot happen without optimizations.
-export CFLAGS="${CFLAGS:--Os}"
+export CFLAGS='-O3 -march=ivybridge -mtune=ivybridge -g2 -m64 -Wl,-z,max-page-size=0x1000 -fPIC -falign-functions=32'
+export ASFLAGS=''
+export LDFLAGS='-Wl,-z,max-page-size=0x1000 '
+export LANG=C
+export GCC_IGNORE_WERROR=1
+
+patch -p1 < glibc-stable-branch.patch
+patch -p1 < 0001-Set-host.conf-multi-to-on-by-default.patch
+patch -p1 < 0001-sysdeps-unix-Add-support-for-usr-lib32-as-a-system-l.patch
+patch -p1 < ld-so-cache-in-var.patch
+patch -p1 < mkdir-ldconfig.patch
+patch -p1 < locale-var-cache.patch
+patch -p1 < nonscd.patch
+patch -p1 < alternate_trim.patch
+patch -p1 < tzselect-proper-zone-file.patch
+patch -p1 < malloc_tune.patch
+patch -p1 < 0001-misc-Support-fallback-stateless-shells-path-in-absen.patch
+patch -p1 < stateless.patch
+patch -p1 < mathlto.patch
+patch -p1 < vzeroupper-2.27.patch
+patch -p1 < pause.patch
+patch -p1 < nostackshrink.patch
+patch -p1 < 0001-Set-vector-width-and-alignment-to-fix-GCC-AVX-issue.patch
+patch -p1 < disable-vectorization-even-more.patch
+patch -p1 < 0001-Force-ffsll-to-be-64-bytes-aligned.patch
+patch -p1 < utf8-locale-naming.patch
+patch -p1 < noclone3yet.patch
+patch -p1 < seccomp_workaround.patch
+patch -p1 < reenable_DT_HASH.patch
+patch -p1 < nsswitch.patch
 
 # Build must happen outside of glibc source.
 mkdir -p glibc-build
@@ -13,9 +42,11 @@ cd glibc-build
     --libexecdir=/usr/lib \
     --enable-bind-now \
     --enable-stack-protector=strong \
-    --disable-nscd \
+    --enable-nscd \
     --disable-profile \
     --disable-werror \
+    --enable-clocale=gnu \
+    --disable-debug \
     libc_cv_include_x86_isa_level=no \
     libc_cv_have_x86_lahf_sahf=no \
     libc_cv_have_x86_movbe=no
@@ -43,7 +74,7 @@ make DESTDIR="$1" install
 rm -f "$1/var/db/Makefile" "$1/etc/ld.so.cache"
 
 mkdir -p "$1/usr/lib/locale"
-printf "en_US.UTF-8 UTF-8\n" > "$1/etc/locale.gen"
+printf "C.UTF-8 UTF-8\n" > "$1/etc/locale.gen"
 
 cd ..
 
@@ -56,3 +87,4 @@ for script in ldd locale-gen sotruss; do
     cp -f "sh-alternatives/$script" "$1/usr/bin/$script"
     chmod +x "$1/usr/bin/$script"
 done
+
