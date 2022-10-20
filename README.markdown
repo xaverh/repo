@@ -15,3 +15,4 @@
   - patch
   - glibc
   - zlib
+  - bzip2
