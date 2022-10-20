@@ -16,13 +16,12 @@
   - glibc
   - zlib
   - bzip2
+  - lz4
   - xz
-  
-  
-  
+  - zstd
   
   
 # Backlog
 
-- [TODO] why no zopfli in pigz?
-
+- [TODO] Why no zopfli in pigz?
+- [TODO] Zstandard as replacement for everything that it can be a replacement for.
