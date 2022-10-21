@@ -1,2 +1,4 @@
-curl    make
-zlib    make
+curl
+expat
+openssl
+zlib

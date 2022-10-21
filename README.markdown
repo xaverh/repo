@@ -7,6 +7,7 @@
 5. add new flags
 6. reinstall everything that has been installed so far
 7. install `openssl kiss make`
+8. install `git`
 
 # Backlog
 
@@ -14,3 +15,4 @@
 - [TODO] Zstandard as replacement for everything that it can be a replacement for.
 - [NOTE] Flags should be in kiss_hook.sh instead of profile
 - [TODO] Clear Linux* Patches for GCC
+- [IDEA] Build crucial packages in core (and maybe metal) statically against musl, cf. $/oasis, $/dilyn-corner/kiss-static
