@@ -6,7 +6,7 @@
 4. (re)install `baselayout certs gawk expat libffi sqlite python linux-headers patch glibc zlib bzip2 lz4 xz zstd m4 flex bison binutils gcc`
 5. add new flags
 6. reinstall everything that has been installed so far
-7. install `openssl`
+7. install `openssl kiss make`
 
 # Backlog
 
