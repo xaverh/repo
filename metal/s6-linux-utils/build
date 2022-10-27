@@ -2,8 +2,10 @@
 
 ./configure \
     --prefix=/usr \
-    --enable-allstatic \
-    --enable-static-libc \
+    --disable-static \
+    --disable-allstatic \
+    --disable-static-libc \
+    --enable-shared \
     --libexecdir=/usr/lib
 
 make

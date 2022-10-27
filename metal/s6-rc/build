@@ -3,8 +3,10 @@
 ./configure \
     --prefix=/usr \
     --libexecdir=/usr/lib \
-    --enable-allstatic \
-    --enable-static-libc
+    --disable-static \
+    --disable-allstatic \
+    --disable-static-libc \
+    --enable-shared
 
 make
 make DESTDIR="$1" install

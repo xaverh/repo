@@ -1,3 +1,5 @@
 execline
 s6
-skalibs make
+s6-linux-utils
+s6-portable-utils
+skalibs

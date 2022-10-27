@@ -3,9 +3,9 @@
 ./configure \
     --prefix=/usr \
     --libexecdir=/usr/lib \
-    --enable-allstatic \
-    --enable-static-libc \
-    --skeldir=/usr/share/s6-linux-init/skel \
+    --disable-static \
+    --disable-allstatic \
+    --disable-static-libc \
     --enable-absolute-paths
 
 make

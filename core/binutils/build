@@ -11,7 +11,7 @@ export PATH="$PATH:$PWD"
 ./configure \
     --prefix=/usr \
     --with-lib-path=/usr/lib \
-    --enable-targets=x86_64-pep \
+    --enable-targets=x86_64-linux-gnu \
     --enable-deterministic-archives \
     --enable-gold \
     --enable-lto \
@@ -29,6 +29,6 @@ export PATH="$PATH:$PWD"
 
 make configure-host
 make tooldir=/usr
-make tooldir=/usr install
+make DESTDIR="$1" tooldir=/usr install
 
 ln -sf ld.bfd "$1/usr/bin/ld"

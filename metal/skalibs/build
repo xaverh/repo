@@ -3,9 +3,10 @@
 ./configure \
     --prefix=/usr \
     --with-default-path=/usr/bin \
-    --disable-shared \
-    --enable-allstatic \
-    --enable-static-libc
+    --enable-shared \
+    --disable-static \
+    --disable-allstatic \
+    --disable-static-libc
 
 make
 make DESTDIR="$1" install

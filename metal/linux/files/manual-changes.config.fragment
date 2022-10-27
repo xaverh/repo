@@ -112,4 +112,4 @@ CONFIG_NTFS3_LZX_XPRESS=y
 CONFIG_DEVTMPFS=y
 CONFIG_DEVTMPFS_MOUNT=y
 CONFIG_DEVTMPFS_SAFE=y
-CONFIG_DEFAULT_INIT="/usr/lib/s6-linux-init/current/bin/init"
+CONFIG_DEFAULT_INIT="/etc/s6-linux-init/current/bin/init"
