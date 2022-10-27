@@ -11,6 +11,26 @@
 9. install `s6 s6-rc s6-linux-init s6-linux-utils s6-portable-utils`
 10. build `linux`
 
+=======
+4. (re)install
+  - baselayout
+  - certs
+  - gawk
+  - expat
+  - libffi
+  - sqlite
+  - python
+  - linux-headers
+  - patch
+  - glibc
+  - zlib
+  - bzip2
+  - lz4
+  - xz
+  - zstd
+  - m4
+  
+  
 # Backlog
 
 - [TODO] Why no zopfli in pigz?
