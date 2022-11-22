@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+cd src
+
+# Makefile doesn't fill in automake variables in launchers.
+for file in install/nix/*.am; do
+    sed \
+        -e "s:@APPNAME@:redeclipse:g" \
+        -e "s:@LIBEXECDIR@:/usr/lib:g" \
+        "$file" > _
+    mv -f _ "$file"
+done
+
+# Makefile uses lowercase prefix.
+make
+make prefix=/usr DESTDIR="$1" system-install

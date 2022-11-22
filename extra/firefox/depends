@@ -10,12 +10,30 @@ freetype-harfbuzz
 gdk-pixbuf
 glib
 gtk+3
+libICE
+libSM
+libX11
+libXau
+libXcomposite
+libXcursor
+libXdamage
+libXext
+libXfixes
+libXi
+libXinerama
+libXrandr
+libXrender
+libXt
+libXxf86vm
+libXtst
 libdrm
 libffi
 libjpeg-turbo
 libpng
 libvpx
 libwebp
+libxcb
+libxshmfence
 llvm          make
 m4            make
 mesa
@@ -28,6 +46,4 @@ pixman
 pkgconf       make
 python        make
 rust          make
-wayland
-wayland-protocols make
 zlib

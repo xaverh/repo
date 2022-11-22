@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+# Don't build tests that fail due to `gnutls` not being built with `p11-kit`.
+sed "/subdir('tests')/d" tls/meson.build > _
+mv -f _ tls/meson.build
+
+# Check if we have openssl, and use it if we have it.
+if pkg-config --exists openssl; then
+    OPENSSL=enabled
+else
+    GNUTLS=enabled
+fi
+
+meson setup \
+    -Dprefix=/usr \
+    -Dsysconfdir=/etc \
+    -Dlocalstatedir=/var \
+    -Dlibproxy=disabled \
+    -Dopenssl=${OPENSSL:-disabled} \
+    -Dgnutls=${GNUTLS:-disabled} \
+    output
+
+ninja -C output
+ninja -C output install

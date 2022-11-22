@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+muon setup \
+    -Dprefix=/usr \
+    output
+
+ninja -C output
+muon  -C output install

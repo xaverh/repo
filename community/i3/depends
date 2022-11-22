@@ -1,0 +1,15 @@
+bash make
+cairo
+glib
+libev
+libxcb
+libxkbcommon
+muon make
+pango
+samurai make
+xcb-util
+xcb-util-cursor
+xcb-util-keysyms
+xcb-util-wm
+xcb-util-xrm
+yajl

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+# Remove the libstartup-notification dependency.
+patch -p0 < i3-no-libstartup-notification.patch
+
+muon setup \
+    -Dprefix=/usr \
+    output
+
+ninja -C output
+muon  -C output install

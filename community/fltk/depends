@@ -1,0 +1,15 @@
+expat
+fontconfig
+freetype-harfbuzz
+glib
+libX11
+libXau
+libXcursor
+libXext
+libXfixes
+libXft
+libXinerama
+libXrender
+libjpeg-turbo
+libpng
+libxcb

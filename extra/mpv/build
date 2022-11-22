@@ -1,12 +1,15 @@
 #!/bin/sh -e
 
-meson \
-    --prefix=/usr \
+export DESTDIR="$1"
+
+meson setup \
+    -Dprefix=/usr \
+    -Dmandir=/usr/share/man \
     -Dalsa=enabled \
     -Dlibmpv=true \
-    -Dwayland=enabled \
-    -Dx11=disabled \
-    . output
+    -Dwayland=disabled \
+    -Dx11=enabled \
+    output
 
 ninja -C output
 ninja -C output install

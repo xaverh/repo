@@ -1,0 +1,5 @@
+cmake make
+gcc
+glu
+mesa
+sdl2

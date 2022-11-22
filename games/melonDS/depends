@@ -1,0 +1,7 @@
+cmake make
+glib
+libarchive
+libepoxy
+libslirp
+qt5
+sdl2

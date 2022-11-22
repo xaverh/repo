@@ -1,6 +1,16 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
+
+# Check for libtls, available when using libressl or libretls.
+if pkg-config --exists libtls; then
+    _ssl="--enable-libtls"
+else
+    # Assume OpenSSL
+    _ssl="--enable-openssl"
+fi
 
 ./configure \
     --cc="$CC" \
@@ -9,11 +19,6 @@ patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
     --disable-debug \
     --disable-libxml2 \
     --disable-static \
-    --disable-libxcb \
-    --disable-libxcb-shm \
-    --disable-libxcb-xfixes \
-    --disable-libxcb-shape \
-    --disable-xlib \
     --enable-gpl \
     --enable-libass \
     --enable-libdrm \
@@ -26,10 +31,10 @@ patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
     --enable-libx265 \
     --enable-libxvid \
     --enable-nonfree \
-    --enable-openssl \
+    $_ssl \
     --enable-shared \
     --enable-version3 \
-    --x86asmexe=nasm \
+    --x86asmexe=nasm
 
 make
 make install
