@@ -1,0 +1,29 @@
+#!/bin/sh -e
+
+for p in *.patch; do
+    patch -p1 < "$p"
+done
+
+# Fix hardcoded `gcc` ( there is HOST_CC := $(CC) on line after this,
+# but upstream seems to use it inconsistently ). Otherwise build fails on
+# `clang` based systems with no `gcc` installed.
+sed -i 's/CC := gcc/CC ?= gcc/' Makefile
+
+./configure \
+    --include_dir /usr/include
+
+for var in HAVE_BERKELEY_DB HAVE_CAP HAVE_LIBCAP HAVE_MNL \
+    HAVE_ELF HAVE_RPC HAVE_SELINUX HAVE_LIBBSD TC_CONFIG_XT; do
+      sed "/$var/d" config.mk > _
+      echo "$var := n" >> _
+      mv -f _ config.mk
+done
+
+sed '/LDLIBS/d' config.mk > _
+mv -f _ config.mk
+
+make KERNEL_INCLUDE=y
+make PREFIX=/usr DESTDIR="$1" SBINDIR="/usr/bin" install
+
+install -Dm0644 include/libnetlink.h "$1/usr/include/libnetlink.h"
+install -Dm0644 lib/libnetlink.a "$1/usr/lib/libnetlink.a"

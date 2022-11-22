@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --bindir=/usr/bin \
+    --disable-documentation \
+    --disable-backtrace \
+    --disable-zstd \
+    --disable-libudev
+
+make
+make DESTDIR="$1" install
