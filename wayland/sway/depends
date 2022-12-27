@@ -1,5 +1,4 @@
 cairo
-flex make
 json-c
 libevdev
 libinput
