@@ -1,6 +1,7 @@
-https://ftp.mozilla.org/pub/firefox/releases/111.0b3/source/firefox-111.0b3.source.tar.xz
+https://ftp.mozilla.org/pub/firefox/releases/111.0b8/source/firefox-111.0b8.source.tar.xz
 patches/fix-linux-header.patch
 patches/musl-sandbox.patch
+patches/no-atk.patch
 patches/no-dbus.patch
 patches/no-fribidi.patch
 patches/no-perl.patch
