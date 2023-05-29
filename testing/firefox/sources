@@ -1,4 +1,4 @@
-https://ftp.mozilla.org/pub/firefox/releases/114.0b3/source/firefox-114.0b3.source.tar.xz
+https://ftp.mozilla.org/pub/firefox/releases/114.0b9/source/firefox-114.0b9.source.tar.xz
 patches/musl-sandbox.patch
 patches/no-atk.patch
 patches/no-dbus.patch
