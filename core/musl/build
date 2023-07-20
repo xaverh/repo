@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < lfs64.patch
-
 # Uncomment if using valgrind or similar.
 # :>nostrip
 
