@@ -2,7 +2,9 @@
 
 export DESTDIR="$1"
 
-patch -p1 < fix-curl.patch
+for p in *.patch; do
+    patch -p1 < "$p"
+done
 
 # Instruct the compiler to trim absolute paths in resulting binaries and instead
 # change them to relative paths ($PWD/... ./...).
@@ -14,14 +16,22 @@ sed 's/\(crt_static_default = \)true/\1false/' \
 mv -f _ compiler/rustc_target/src/spec/linux_musl_base.rs
 
 # Ignore checksums of files modified above.
-sed 's/\("files":{\)[^}]*/\1/' \
-    vendor/curl-sys/.cargo-checksum.json > _
-mv -f _ vendor/curl-sys/.cargo-checksum.json
+for p in \
+    curl-sys \
+    getrandom-0.2.8 \
+    libc \
+    libc-0.2.138 \
+    libc-0.2.139 \
+    libc-0.2.140 \
+    libc-0.2.143
+do
+    sed 's/\("files":{\)[^}]*/\1/' vendor/"$p"/.cargo-checksum.json > _
+    mv -f _ vendor/"$p"/.cargo-checksum.json
+done
 
 cat > config.toml <<EOF
 [llvm]
 link-shared = true
-skip-rebuild = true
 
 [build]
 build     = "x86_64-unknown-linux-musl"
@@ -66,7 +76,7 @@ EOF
         # This mimics the download process of rust's 'x.py'
         # bootstrap library to allow for the removal of the internet
         # connection requirement per build.
-        mkdir -p "${cache_dir:=build/cache/2023-03-28}"
+        mkdir -p "${cache_dir:=build/cache/2023-06-01}"
 
         for tarball in *.tar.xz\?no-extract; do
             mv -f "$tarball" "$cache_dir/${tarball%%\?no-extract}"
