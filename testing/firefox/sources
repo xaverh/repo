@@ -1,4 +1,5 @@
-https://ftp.mozilla.org/pub/firefox/releases/116.0b2/source/firefox-116.0b2.source.tar.xz
+https://ftp.mozilla.org/pub/firefox/releases/116.0b8/source/firefox-116.0b8.source.tar.xz
+patches/fix-overalignment.patch
 patches/musl-sandbox.patch
 patches/no-atk.patch
 patches/no-dbus.patch
