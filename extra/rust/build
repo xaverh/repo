@@ -6,13 +6,13 @@ for p in *.patch; do
     patch -p1 < "$p"
 done
 
+: "${AR:=ar}"
+: "${CC:=cc}"
+
 mkdir _lib
 
 (
     cd _lib
-
-    : "${AR:=ar}"
-    : "${CC:=cc}"
 
     $CC ../liblfs64.c -c -fPIC -o liblfs64.o
     $AR rcs liblfs64.a liblfs64.o
