@@ -1,7 +1,0 @@
-https://ftp.mozilla.org/pub/firefox/releases/120.0b9/source/firefox-120.0b9.source.tar.xz
-patches/fix-target-detection.patch
-patches/fix-vaapi.patch
-patches/musl-sandbox.patch
-patches/no-atk.patch
-patches/no-dbus.patch
-patches/no-fribidi.patch
