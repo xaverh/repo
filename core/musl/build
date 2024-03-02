@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-patch -p1 < elfutils-0.190-relr.patch
-
 # Uncomment if using valgrind or similar.
 # :>nostrip
 
