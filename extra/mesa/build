@@ -19,8 +19,8 @@ meson setup \
     -Dlocalstatedir=/var \
     -Dbuildtype=release \
     -Dglx-read-only-text=true \
-    -Dplatforms=wayland \
-    -Dglx=disabled \
+    -Dplatforms=x11 \
+    -Dglx=auto \
     -Degl=enabled \
     -Dvalgrind=false \
     -Dzstd=disabled \

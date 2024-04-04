@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 mv libavcodec/vulkan_video_codec_av1std_decode.h \
     libavcodec/vulkan_video_codec_av1std_decode_mesa.h
 mv libavcodec/vulkan_video_codec_av1std.h \
@@ -8,6 +10,14 @@ mv libavcodec/vulkan_video_codec_av1std.h \
 patch -p1 < add-av_stream_get_first_dts-for-chromium.patch
 patch -p1 < fix-vulkan-headers.patch
 
+# Check for libtls, available when using libressl or libretls.
+if pkg-config --exists libtls; then
+    _ssl="--enable-libtls"
+else
+    # Assume OpenSSL
+    _ssl="--enable-openssl"
+fi
+
 ./configure \
     --cc="$CC" \
     --cxx="$CXX" \
@@ -15,11 +25,6 @@ patch -p1 < fix-vulkan-headers.patch
     --disable-debug \
     --disable-libxml2 \
     --disable-static \
-    --disable-libxcb \
-    --disable-libxcb-shm \
-    --disable-libxcb-xfixes \
-    --disable-libxcb-shape \
-    --disable-xlib \
     --enable-gpl \
     --enable-libass \
     --enable-libdrm \
@@ -32,12 +37,12 @@ patch -p1 < fix-vulkan-headers.patch
     --enable-libx265 \
     --enable-libxvid \
     --enable-nonfree \
-    --enable-openssl \
+    $_ssl \
     --enable-shared \
     --enable-version3 \
     --x86asmexe=nasm
 
 make
-make DESTDIR="$1" install
+make install
 
 rm -rf "$1/usr/share/ffmpeg/examples"

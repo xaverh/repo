@@ -2,7 +2,9 @@
 
 export DESTDIR="$1"
 
-patch -p1 < no-fribidi.patch
+for p in *.patch; do
+    patch -p1 < "$p"
+done
 
 # Disable download of missing (optional) dependencies
 # during the build. This cannot be turned off otherwise.
@@ -15,9 +17,8 @@ rm -rf subprojects
 meson setup \
     -Dprefix=/usr \
     -Dgtk_doc=false \
-    -Dxft=disabled \
     -Dintrospection=disabled \
-    build
+    output
 
-ninja -C build
-ninja -C build install
+ninja -C output
+ninja -C output install

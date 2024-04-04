@@ -1,11 +1,17 @@
 #!/bin/sh -e
 
+export DESTDIR="$1"
+
 for p in *.patch; do
     patch -p1 < "$p"
 done
 
 sed '/UNZIP/d' toolkit/moz.configure > _
 mv -f _ toolkit/moz.configure
+
+sed "s/ccache_stats = None/return None/" \
+    python/mozbuild/mozbuild/configure/check_debug_ranges.py >_
+mv -f _ python/mozbuild/mozbuild/configure/check_debug_ranges.py
 
 # If using libc++, CXXSTDLIB needs to be set manually.
 case $("$CC" -print-file-name=libc++.so) in */*)
@@ -29,7 +35,6 @@ export MOZ_NOSPAM=1
 cat > .mozconfig << EOF
 ac_add_options --prefix=/usr
 ac_add_options --libdir=/usr/lib
-ac_add_options --enable-default-toolkit=cairo-gtk3-wayland-only
 ac_add_options --enable-strip
 ac_add_options --enable-release
 ac_add_options --enable-rust-simd
@@ -37,7 +42,7 @@ ac_add_options --enable-audio-backends=alsa
 ac_add_options --enable-install-strip
 ac_add_options --enable-official-branding
 ac_add_options --enable-application=browser
-ac_add_options --enable-optimize
+ac_add_options --enable-optimize="${CFLAGS:-} -w"
 ac_add_options --with-system-ffi
 ac_add_options --with-system-jpeg
 ac_add_options --with-system-libvpx
@@ -67,7 +72,7 @@ ac_add_options --disable-system-extension-dirs
 EOF
 
 ./mach build
-DESTDIR="$1" ./mach install
+./mach install
 
 # Remove a lot of uneeded "stuff".
 rm -rf \

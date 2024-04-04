@@ -2,12 +2,14 @@
 
 export DESTDIR="$1"
 
+patch -p1 < remove-malloc-stats.patch
+
 meson setup \
     -Dprefix=/usr \
     -Dtee=enabled \
-    -Dxcb=disabled \
-    -Dxlib=disabled \
-    -Dxlib-xcb=disabled \
+    -Dxcb=enabled \
+    -Dxlib=enabled \
+    -Dxlib-xcb=enabled \
     -Dtests=disabled \
     output
 

@@ -1,0 +1,5 @@
+cmake make
+<<<<<<< HEAD:extra/libjpeg-turbo/depends
+nasm  make
+=======
+>>>>>>> xorg:community/cgal/depends

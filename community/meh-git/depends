@@ -1,0 +1,7 @@
+<<<<<<< HEAD:extra/libwebp/depends
+=======
+giflib
+libXext
+>>>>>>> xorg:community/meh-git/depends
+libjpeg-turbo
+libpng

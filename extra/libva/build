@@ -6,9 +6,10 @@ meson setup \
     -Dprefix=/usr \
     -Dsysconfdir=/etc \
     -Dmandir=/usr/share/man \
-    -Dwith_wayland=yes \
-    -Dwith_x11=no \
-    -Dwith_glx=no \
+    -Dpkg_config_path=/usr/lib/pkgconfig \
+    -Dwith_wayland=no \
+    -Dwith_x11=yes \
+    -Dwith_glx=yes \
     output
 
 ninja -C output

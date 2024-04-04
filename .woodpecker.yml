@@ -1,9 +1,0 @@
-steps:
-  build:
-    image: alpine
-    when:
-      branch: [ master ]
-    commands: |
-      apk add --no-cache shellcheck
-
-      find ./* -type f -name build -o -name post-\* -o -name pre-\* | sed 's/[^[:alnum:]]/\\\\&/g' | xargs shellcheck

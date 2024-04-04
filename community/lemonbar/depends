@@ -1,0 +1,6 @@
+<<<<<<< HEAD:extra/libvpx/depends
+nasm make
+=======
+libxcb
+perl make
+>>>>>>> xorg:community/lemonbar/depends
