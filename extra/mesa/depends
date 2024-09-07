@@ -1,6 +1,7 @@
 bison make
 expat
-flex  make
+flex make
+libclc make
 libdrm
 libelf
 linux-headers make
@@ -8,6 +9,8 @@ m4 make
 meson make
 pkgconf make
 python-mako make
+python-yaml make
+spirv-llvm-translator make
 wayland
 wayland-protocols make
 zlib
