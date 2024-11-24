@@ -2,16 +2,13 @@
 
 export DESTDIR="$1"
 
-patch -p1 < fix-curl.patch
+for p in *.patch; do
+    patch -p1 < "$p"
+done
 
 # Instruct the compiler to trim absolute paths in resulting binaries and instead
 # change them to relative paths ($PWD/... ./...).
 export RUSTFLAGS="$RUSTFLAGS --remap-path-prefix=$PWD=."
-
-# Set shared linking as the default.
-sed 's/\(crt_static_default = \)true/\1false/' \
-    compiler/rustc_target/src/spec/base/linux_musl.rs > _
-mv -f _ compiler/rustc_target/src/spec/base/linux_musl.rs
 
 sed 's/\("files":{\)[^}]*/\1/' \
     vendor/curl-sys-0.4.52+curl-7.81.0/.cargo-checksum.json > _
