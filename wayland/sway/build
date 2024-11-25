@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export CFLAGS="$CFLAGS -Wno-error=switch"
+
 export DESTDIR="$1"
 
 meson setup \
