@@ -1,8 +1,0 @@
-https://ftp.mozilla.org/pub/firefox/releases/133.0b9/source/firefox-133.0b9.source.tar.xz
-patches/fix-target-detection.patch
-patches/fix-vaapi.patch
-patches/gcc-14.patch
-patches/musl-sandbox.patch
-patches/no-atk.patch
-patches/no-dbus.patch
-patches/no-fribidi.patch
