@@ -18,6 +18,10 @@ sed 's/\("files":{\)[^}]*/\1/' \
     vendor/curl-sys-0.4.74+curl-8.9.0/.cargo-checksum.json > _
 mv -f _ vendor/curl-sys-0.4.74+curl-8.9.0/.cargo-checksum.json
 
+sed 's/\("files":{\)[^}]*/\1/' \
+    vendor/curl-sys-0.4.78+curl-8.11.0/.cargo-checksum.json > _
+mv -f _ vendor/curl-sys-0.4.78+curl-8.11.0/.cargo-checksum.json
+
 cat > config.toml <<EOF
 [llvm]
 link-shared = true
@@ -66,7 +70,7 @@ EOF
         # This mimics the download process of rust's 'x.py'
         # bootstrap library to allow for the removal of the internet
         # connection requirement per build.
-        mkdir -p "${cache_dir:=build/cache/2024-11-28}"
+        mkdir -p "${cache_dir:=build/cache/2025-01-09}"
 
         for tarball in *.tar.xz\?no-extract; do
             mv -f "$tarball" "$cache_dir/${tarball%%\?no-extract}"
