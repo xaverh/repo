@@ -1,16 +1,18 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c7a6130..74096b4 100644
+index f69b30f..be3d7c0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -310,14 +310,9 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+@@ -314,16 +314,9 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
  # compiler instances. This is hacky but greatly reduces compile time
  # on a multicore machine.
  list(APPEND MOLD_ELF_TARGETS
--  X86_64 I386 ARM64LE ARM64BE ARM32 RV32LE RV32BE RV64LE RV64BE PPC32
--  PPC64V1 PPC64V2 S390X SPARC64 M68K SH4LE SH4BE LOONGARCH32 LOONGARCH64)
+-  X86_64 I386 ARM64LE ARM64BE ARM32LE ARM32BE RV32LE RV32BE RV64LE
+-  RV64BE PPC32 PPC64V1 PPC64V2 S390X SPARC64 M68K SH4LE SH4BE
+-  LOONGARCH32 LOONGARCH64)
 +  X86_64)
  
  list(APPEND MOLD_ELF_TEMPLATE_FILES
+-  src/arch-arm32.cc
 -  src/arch-arm64.cc
 -  src/arch-loongarch.cc
 -  src/arch-riscv.cc
@@ -18,11 +20,10 @@ index c7a6130..74096b4 100644
    src/cmdline.cc
    src/filetype.cc
    src/gc-sections.cc
-@@ -385,14 +380,6 @@ target_sources(mold PRIVATE
+@@ -391,13 +384,6 @@ target_sources(mold PRIVATE
    lib/perf.cc
    lib/random.cc
    lib/tar.cc
--  src/arch-arm32.cc
 -  src/arch-i386.cc
 -  src/arch-m68k.cc
 -  src/arch-ppc32.cc
@@ -34,7 +35,7 @@ index c7a6130..74096b4 100644
    src/config.cc
    src/elf.cc
 diff --git a/src/main.cc b/src/main.cc
-index 13a77ca..feb9e85 100644
+index 950c0f3..7bd2bae 100644
 --- a/src/main.cc
 +++ b/src/main.cc
 @@ -286,11 +286,6 @@ int mold_main(int argc, char **argv) {
@@ -50,10 +51,10 @@ index 13a77ca..feb9e85 100644
  
    install_signal_handler();
 diff --git a/src/mold.h b/src/mold.h
-index 71add0e..f58c858 100644
+index 17832b5..d622187 100644
 --- a/src/mold.h
 +++ b/src/mold.h
-@@ -1641,7 +1641,6 @@ std::vector<std::string> parse_nonpositional_args(Context<E> &ctx);
+@@ -1659,7 +1659,6 @@ std::vector<std::string> parse_nonpositional_args(Context<E> &ctx);
  // passes.cc
  //
  
@@ -62,10 +63,10 @@ index 71add0e..f58c858 100644
  template <typename E> void apply_exclude_libs(Context<E> &);
  template <typename E> void create_synthetic_sections(Context<E> &);
 diff --git a/src/passes.cc b/src/passes.cc
-index 5928682..31835b9 100644
+index 835dc65..4d26ec5 100644
 --- a/src/passes.cc
 +++ b/src/passes.cc
-@@ -13,52 +13,6 @@
+@@ -13,54 +13,6 @@
  
  namespace mold {
  
@@ -82,8 +83,10 @@ index 5928682..31835b9 100644
 -    return mold_main<ARM64LE>(argc, argv);
 -  if (target == ARM64BE::name)
 -    return mold_main<ARM64BE>(argc, argv);
--  if (target == ARM32::name)
--    return mold_main<ARM32>(argc, argv);
+-  if (target == ARM32LE::name)
+-    return mold_main<ARM32LE>(argc, argv);
+-  if (target == ARM32BE::name)
+-    return mold_main<ARM32BE>(argc, argv);
 -  if (target == RV64LE::name)
 -    return mold_main<RV64LE>(argc, argv);
 -  if (target == RV64BE::name)
@@ -118,7 +121,7 @@ index 5928682..31835b9 100644
  template <typename E>
  void apply_exclude_libs(Context<E> &ctx) {
    Timer t(ctx, "apply_exclude_libs");
-@@ -3290,7 +3244,6 @@ void show_stats(Context<E> &ctx) {
+@@ -3354,7 +3306,6 @@ void show_stats(Context<E> &ctx) {
  
  using E = MOLD_TARGET;
  
