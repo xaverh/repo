@@ -1,4 +1,5 @@
 expat
-flex  make
+flex    make
 libffi
-meson make
+meson   make
+pkgconf make

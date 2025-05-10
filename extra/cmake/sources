@@ -1,2 +1,1 @@
-https://cmake.org/files/vMAJOR.MINOR/cmake-VERSION.tar.gz
-patches/cmake-no-execinfo.patch
+https://cmake.org/files/v4.0/cmake-4.0.2.tar.gz

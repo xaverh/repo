@@ -68,17 +68,14 @@ should start with no further configuration.
 
 --[005] Enable VAAPI Acceleration ----------------------------------------------
 
-Make sure that the following are set in your about:config page.
+As of Firefox 102, only the following modification to about:config should be
+required, with no need to disable any sandbox features.
 
 +------------------------------------------------------------------------------+
 |                                                                              |
 | about:config                                                                 |
 |                                                                              |
-|  gfx.webrender.all=true                                                      |
-|  media.av1.enabled=false                                                     |
-|  media.ffmpeg.dmabuf-textures.disabled=false                                 |
 |  media.ffmpeg.vaapi.enabled=true                                             |
-|  media.ffvpx.enabled=false                                                   |
 |                                                                              |
 +------------------------------------------------------------------------------+
 

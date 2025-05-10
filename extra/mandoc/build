@@ -15,13 +15,12 @@ PREFIX=/usr
 MANDIR=/usr/share/man
 LIBDIR=/usr/lib
 SBINDIR=/usr/bin
-CFLAGS="$CFLAGS -fcommon"
 LN="ln -sf"
 EOF
 
 sh ./configure
 
 make
-make -j1 base-install
+make -j1 DESTDIR="$1" base-install
 
 chmod 755 "$1/usr/bin/"*

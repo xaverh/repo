@@ -1,11 +1,12 @@
 #!/bin/sh -e
 
-# Fix build fail with GCC 10.
-export CFLAGS="$CFLAGS -fcommon"
+patch -p1 < wl_drm-optional.patch
 
-meson \
-    --prefix=/usr \
-    . output
+export DESTDIR="$1"
+
+meson setup \
+    -Dprefix=/usr \
+    output
 
 ninja -C output
 ninja -C output install

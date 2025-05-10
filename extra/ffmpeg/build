@@ -27,9 +27,9 @@
     --enable-openssl \
     --enable-shared \
     --enable-version3 \
-    --x86asmexe=nasm \
+    --x86asmexe=nasm
 
 make
-make install
+make DESTDIR="$1" install
 
 rm -rf "$1/usr/share/ffmpeg/examples"

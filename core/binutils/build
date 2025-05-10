@@ -1,21 +1,12 @@
 #!/bin/sh -e
 
-patch -p1 < fix-fd-issue.patch
-
-# Latest binutils tarball has falsely generated (empty) manual pages.
-# Generating them requires perl. Temporary fix until next release.
-! kiss l perl || {
-    patch -p1 < fix-empty-man.patch
-    rm -f binutils/doc/*.1 ld/ld.1 gas/doc/as.1 gprof/gprof.1
-}
-
 cat > makeinfo <<EOF
 #!/bin/sh
 printf 'makeinfo (GNU texinfo) 5.2\n'
 EOF
 
 chmod +x makeinfo
-export PATH=$PATH:$PWD
+export PATH="$PATH:$PWD"
 
 ./configure \
     --prefix=/usr \
@@ -32,11 +23,13 @@ export PATH=$PATH:$PWD
     --disable-nls \
     --disable-readline \
     --disable-gprof \
+    --disable-gprofng \
     --with-mmap \
-    --with-system-zlib
+    --with-system-zlib \
+    --without-zstd
 
 make configure-host
 make tooldir=/usr
-make tooldir=/usr install
+make tooldir=/usr DESTDIR="$1" install
 
 ln -sf ld.bfd "$1/usr/bin/ld"

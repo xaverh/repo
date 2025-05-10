@@ -1,12 +1,11 @@
 #!/bin/sh -e
 
-patch -p1 < libtheora-1.1.1-libpng16.patch
-patch -p1 < fix-theoraenc.patch
+export CFLAGS="$CFLAGS -std=gnu17"
 
 ./configure \
     --prefix=/usr
 
 make
-make -C lib     install
-make -C include install
-make install-pkgconfigDATA
+make -C lib     DESTDIR="$1" install
+make -C include DESTDIR="$1" install
+make            DESTDIR="$1" install-pkgconfigDATA

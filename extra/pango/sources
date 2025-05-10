@@ -1,2 +1,2 @@
-https://github.com/GNOME/pango/archive/VERSION.tar.gz
+https://download.gnome.org/sources/pango/1.56/pango-1.56.3.tar.xz
 patches/no-fribidi.patch

@@ -1,3 +1,2 @@
-https://www.openssl.org/source/openssl-VERSION.tar.gz
-https://github.com/kisslinux/repo/releases/download/2021.7-9/libretls-3.4.1.tar.gz libretls
-files/update-certdata.sh
+https://github.com/openssl/openssl/releases/download/openssl-3.5.0/openssl-3.5.0.tar.gz
+https://github.com/kiss-community/openssl/releases/download/generated/openssl-3.5.0-generated.tar.gz

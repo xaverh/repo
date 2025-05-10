@@ -1,16 +1,21 @@
 #!/bin/sh -e
 
-make -C xxhash
-
-# Point mold to the local xxhash.
-export CXXFLAGS="-L$PWD/xxhash -I$PWD/xxhash $CXXFLAGS"
+export DESTDIR="$1"
 
 # Force a static build so shared library breakage does not also break the
 # linker (and therefore the ability to recover from the issue).
-export LDFLAGS="$LDFLAGS -static"
+# XXX: Static linking prevents mold from using dlopen() which is required
+# for performing LTO.
+# export LDFLAGS="$LDFLAGS -static"
 
-make
-make install
+patch -p1 < amd64_only.patch
+
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib
+
+cmake --build   build
+cmake --install build
 
 # Create a symbolic link so users can use mold as the linker system-wide
 # (without need for special CFLAGS/CXXFLAGS).

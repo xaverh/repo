@@ -1,10 +1,12 @@
 #!/bin/sh -e
 
-meson \
-    --prefix=/usr \
-    --buildtype=release \
+export DESTDIR="$1"
+
+meson setup \
+    -Dprefix=/usr \
+    -Dbuildtype=release \
     -Dtests=false \
-    . output
+    output
 
 ninja -C output
 ninja -C output install

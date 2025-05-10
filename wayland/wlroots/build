@@ -1,13 +1,14 @@
 #!/bin/sh -e
 
-meson \
-    --prefix=/usr \
+export DESTDIR="$1"
+
+meson setup \
+    -Dprefix=/usr \
     -Ddefault_library=both \
     -Dexamples=false \
     -Dxcb-errors=disabled \
-    -Dx11-backend=disabled \
     -Drenderers=gles2 \
-    . build
+    build
 
 ninja -C build
 ninja -C build install

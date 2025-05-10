@@ -1,5 +1,5 @@
 #!/bin/sh -e
-#
+
 # Seeing as this is the only rust package in the repositories (other than rust
 # itself), this will also serve as a reference to writing network-free rust
 # based packages.
@@ -7,7 +7,7 @@
 # Set the CARGO_HOME variable to the current directory to prevent cargo from
 # touching '$HOME/.cargo'. This keeps the build contained to the package
 # manager's domain.
-export CARGO_HOME=$PWD
+export CARGO_HOME="$PWD"
 
 # Instruct the compiler to trim absolute paths in resulting binaries and instead
 # change them to relative paths ($PWD/... ./...).
@@ -18,10 +18,6 @@ export RUSTFLAGS="$RUSTFLAGS --remap-path-prefix=$PWD=."
 # manager to cache each crate and handle them as regular sources.
 (
     cd vendor
-
-    # Download link for this crate 404s. Mirror link saves the file as
-    # 'download' so it must be renamed.
-    mv -f download wasi-0.9.0+wasi-snapshot-preview1.crate
 
     for crate in *.crate; do
         tar xf "$crate"
@@ -41,7 +37,7 @@ mkdir -p .cargo
 
 # Create the configuration file to tell cargo to look in the 'vendor' directory
 # for the already downloaded sources rather than crates.io (over network).
-cat <<EOF > .cargo/config
+cat <<EOF > .cargo/config.toml
 [source.crates-io]
 replace-with = "vendored-sources"
 

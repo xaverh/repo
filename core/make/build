@@ -1,9 +1,11 @@
 #!/bin/sh -e
 
-export CFLAGS="$CFLAGS -static"
+export CFLAGS="$CFLAGS -std=c17"
+export LDFLAGS="$LDFLAGS -static"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --disable-nls
 
 make
-make install
+make DESTDIR="$1" install
