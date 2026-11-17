@@ -1,0 +1,10 @@
+@stage0
+________________________________________________________________________________
+
+Meta-package for the minimal KISS bootstrap set.
+
+Once kiss is available, you can:
+
+$ export KISS_PATH=.../bootstrap:.../core
+$ kiss b @stage0
+$ kiss i @stage0

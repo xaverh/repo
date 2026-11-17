@@ -1,0 +1,14 @@
+@toolchain
+________________________________________________________________________________
+
+Staged native/cross toolchain bootstrap.
+
+Inspired by firasuke/mussel:
+
+1. musl headers
+2. binutils
+3. gcc + libgcc-static
+4. musl
+5. libgcc-shared
+
+Use after having basic tools, or expand the build script.

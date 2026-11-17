@@ -1,0 +1,8 @@
+baselayout
+linux-headers
+musl
+busybox
+binutils
+gcc
+make
+kiss

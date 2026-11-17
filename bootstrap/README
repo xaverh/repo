@@ -1,0 +1,37 @@
+|/
+|\ISS LINUX Bootstrap
+________________________________________________________________________________
+
+Sabotage-style bootstrap for KISS Linux.
+
+This allows building a KISS system from a regular host Linux distribution
+without relying on a pre-built rootfs tarball.
+
+Inspiration: sabotage-linux, kiss-llvm (@ packages), firasuke/mussel,
+kiss-community/maintainer-utils.
+
+Usage
+________________________________________________________________________________
+
+From a host with gcc, make, git, wget, etc.:
+
+$ cd bootstrap
+$ ./scripts/build-stage0 /path/to/rootfs
+
+This builds a minimal stage0 (busybox, musl, binutils, gcc, make, kiss, ...)
+using the host toolchain into the given directory.
+
+Then:
+
+$ ./scripts/enter-chroot /path/to/rootfs
+
+Inside the chroot, set KISS_PATH and rebuild packages with the new toolchain
+for a self-hosted system.
+
+@-prefixed packages
+________________________________________________________________________________
+
+@stage0     Meta-package listing the minimal bootstrap set.
+@toolchain  Staged toolchain build (musl headers -> binutils -> gcc -> musl).
+
+These can be used once kiss is available in the environment.

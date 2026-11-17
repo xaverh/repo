@@ -1,0 +1,30 @@
+#!/bin/sh -e
+# enter-chroot - Enter the bootstrap chroot
+# Inspired by sabotage enter-chroot and kiss-chroot
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <rootfs-dir>"
+    exit 1
+fi
+
+ROOT="$1"
+
+if [ ! -d "$ROOT" ]; then
+    echo "Rootfs not found: $ROOT"
+    exit 1
+fi
+
+# Mount essential filesystems
+mount -t proc proc "$ROOT/proc" 2>/dev/null || true
+mount -t sysfs sys "$ROOT/sys" 2>/dev/null || true
+mount -o bind /dev "$ROOT/dev" 2>/dev/null || true
+mount -t devpts devpts "$ROOT/dev/pts" 2>/dev/null || true
+
+echo "Entering chroot $ROOT"
+chroot "$ROOT" /bin/sh -l
+
+# Cleanup on exit (basic)
+umount "$ROOT/dev/pts" 2>/dev/null || true
+umount "$ROOT/dev" 2>/dev/null || true
+umount "$ROOT/sys" 2>/dev/null || true
+umount "$ROOT/proc" 2>/dev/null || true

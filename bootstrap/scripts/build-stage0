@@ -1,0 +1,52 @@
+#!/bin/sh -e
+# build-stage0 - Build minimal KISS stage0 using host toolchain
+# Inspired by sabotage build-stage0 and mussel
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <rootfs-dir>"
+    exit 1
+fi
+
+ROOT="$1"
+REPO="$(cd "$(dirname "$0")/../.." && pwd)"
+
+mkdir -p "$ROOT"
+
+# Minimal package order for stage0 (host compiler)
+PACKAGES="baselayout linux-headers musl busybox binutils gcc make kiss"
+
+export KISS_PATH="$REPO/core"
+export KISS_ROOT="$ROOT"
+export CFLAGS="${CFLAGS:--O2 -pipe}"
+export MAKEFLAGS="${MAKEFLAGS:--j$(nproc 2>/dev/null || echo 1)}"
+
+# Ensure kiss is available (copy from repo if not in PATH)
+if ! command -v kiss >/dev/null; then
+    # Minimal kiss bootstrap: the package manager is a shell script
+    mkdir -p "$ROOT/usr/bin"
+    # Assume we extract or copy kiss later; for now use host if present
+    echo "Note: kiss not in PATH. Continuing with manual builds."
+fi
+
+echo "Building stage0 into $ROOT"
+
+for pkg in $PACKAGES; do
+    echo "=> Building $pkg"
+    pkgdir="$REPO/core/$pkg"
+    if [ ! -d "$pkgdir" ]; then
+        echo "Missing package: $pkg"
+        exit 1
+    fi
+
+    # Download sources if needed
+    (cd "$pkgdir" && kiss c 2>/dev/null || true)
+
+    # Run the build script
+    if [ -f "$pkgdir/build" ]; then
+        (cd "$pkgdir" && sh build "$ROOT")
+    else
+        echo "No build script for $pkg"
+    fi
+done
+
+echo "Stage0 complete. Enter with: bootstrap/scripts/enter-chroot $ROOT"

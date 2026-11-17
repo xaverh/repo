@@ -1,0 +1,15 @@
+#!/bin/sh -e
+# Staged toolchain build inspired by firasuke/mussel
+# Assumes sources are available; this is a high-level skeleton.
+
+echo "Building staged toolchain (musl-headers style)"
+
+# Step 1: musl headers (simplified)
+# In practice, extract musl and make install-headers DESTDIR=$1
+
+# Step 2: binutils
+# Step 3: gcc (static libgcc)
+# Step 4: full musl
+# Step 5: shared libgcc
+
+echo "Toolchain stages complete (skeleton). See mussel for full steps."

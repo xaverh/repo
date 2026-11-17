@@ -22,3 +22,9 @@ ________________________________________________________________________________
 $ cd /path/to/repo
 $ git config gpg.ssh.allowedSignersFile .allowed_signers
 $ git config merge.verifySignatures true
+
+
+Bootstrap
+________________________________________________________________________________
+
+See bootstrap/README for sabotage-style bootstrap from other Linux distros.

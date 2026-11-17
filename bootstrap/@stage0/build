@@ -1,0 +1,3 @@
+#!/bin/sh -e
+# Meta-package: nothing to build, just depends on the stage0 set
+echo "Stage0 meta-package. Dependencies should be installed."
