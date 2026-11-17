@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
-meson \
-    --prefix=/usr \
+export DESTDIR="$1"
+
+meson setup \
+    -Dprefix=/usr \
     -Djpeg=disabled \
-    . build
+    -Dwerror=false \
+    build
 
 ninja -C build
 ninja -C build install

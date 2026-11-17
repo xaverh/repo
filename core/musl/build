@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+for p in *.patch; do
+    patch -p1 < "$p"
+done
+
 # Uncomment if using valgrind or similar.
 # :>nostrip
 
@@ -10,7 +14,7 @@
 #   --enable-debug
 
 make
-make install
+make DESTDIR="$1" install
 
 mkdir -p "$1/usr/bin"
 ln -s  /usr/lib/ld-musl-x86_64.so.1 "$1/usr/bin/ldd"

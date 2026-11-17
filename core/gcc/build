@@ -1,30 +1,25 @@
 #!/bin/sh -e
 
-# Make sure gmp is built with generic options.
-cp gcc/gmp/configfsf.guess gcc/gmp/config.guess
-cp gcc/gmp/configfsf.sub   gcc/gmp/config.sub
-
 # Use lib not lib64 by default.
-sed '/m64=/s/lib64/lib/' gcc/gcc/config/i386/t-linux64 > _
-mv -f _ gcc/gcc/config/i386/t-linux64
-sed 's/lib64/lib/' gcc/gcc/config/i386/linux64.h > _
-mv -f _ gcc/gcc/config/i386/linux64.h
+sed '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64 > _
+mv -f _ gcc/config/i386/t-linux64
+sed 's/lib64/lib/' gcc/config/i386/linux64.h > _
+mv -f _ gcc/config/i386/linux64.h
 
 # Build must happen outside of gcc source.
 mkdir -p gcc-build
 cd gcc-build
 
 # Grab the system's GCC version.
-IFS=. read -r gcc_version _ 2>/dev/null \
-    < "$KISS_ROOT/var/db/kiss/installed/gcc/version" || gcc_version=null
+gcc_version=$(gcc -dumpfullversion 2>/dev/null) || gcc_version=null
 
 # Skip the bootstrap process if we are able.
-case $2 in "$gcc_version"*)
+case $2 in "${gcc_version%%.*}"*)
     printf '%s\n' "Minor version difference, disabling bootstrap."
     bootstrap=--disable-bootstrap
 esac
 
-../gcc/configure \
+../configure \
     libat_cv_have_ifunc=no \
     --prefix=/usr \
     --libexecdir=/usr/lib \
@@ -55,7 +50,7 @@ esac
     "${bootstrap:---enable-bootstrap}"
 
 make
-make install
+make DESTDIR="$1" install
 
 # Save 35MB.
 find "$1" -name libgtkpeer.a  -exec rm -f {} +

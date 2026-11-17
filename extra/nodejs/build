@@ -3,24 +3,23 @@
 # Fix build when libatomic.so does not exist in the system.
 # This may be provided by compiler-rt which requires no additional
 # linker flags to be used.
-[ -r "$KISS_ROOT/usr/lib/libatomic.so" ] || {
-    sed 's/-latomic//' node.gyp > _
-    mv -f _ node.gyp
-}
+case $("$CC" -print-file-name=libatomic.so) in */*) ;; *)
+    patch -p1 < no-libatomic.patch
+esac
+
+# Missing include for libc++
+patch -p1 < fix-lief-libc++.patch
 
 ./configure \
     --shared-zlib \
     --shared-openssl \
-    --with-intl=none \
-    --without-etw \
-    --without-dtrace \
-    --without-report \
+    --with-intl=small-icu \
     --without-node-snapshot \
     --without-node-code-cache \
     --ninja
 
 ninja -C out/Release
-tools/install.py install "$1" /usr
+tools/install.py install --dest-dir "$1" --prefix /usr
 
 # Remove unneeded files.
 rm -rf \

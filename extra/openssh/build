@@ -7,14 +7,15 @@
     --sbindir=/usr/bin \
     --libexecdir=/usr/lib/openssh \
     --without-selinux \
+    --without-zlib-version-check \
     --with-privsep-user=nobody \
     --with-mantype=doc \
     --without-rpath \
     --disable-strip \
-    --with-ssl-engine \
     --with-pid-dir=/run \
     --disable-wtmp \
-    --disable-utmp
+    --disable-utmp \
+    --disable-security-key
 
 make
 make DESTDIR="$1" install
