@@ -1,14 +1,12 @@
 # XLibre packages for KISS Linux
 
-Packages for the XLibre X11 server and common drivers.
+Full suite matching the packages in xlibre-alpine/xlibre-ports.
 
-Add this directory to the start of your KISS_PATH to prefer XLibre over Xorg packages from other repos.
+Add this directory to the start of your KISS_PATH to prefer XLibre.
 
-Main packages:
-- xlibre-xserver
-- xlibre-xf86-video-intel
-- xlibre-xf86-input-libinput
-- xlibre-xf86-video-amdgpu
-- xlibre-xf86-input-evdev
+Includes:
+- xlibre-xserver (core)
+- All input drivers (evdev, libinput, synaptics, vmmouse, wacom)
+- All video drivers (amdgpu, ati, intel, nouveau, nv, vesa, vmware, and legacy ones)
 
-Drivers must be built against xlibre-xserver (ABI changes).
+Drivers must be built against xlibre-xserver.
