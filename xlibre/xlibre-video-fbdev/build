@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+if [ -f meson.build ]; then
+  meson setup -Dprefix=/usr output
+  ninja -C output
+  ninja -C output install
+else
+  ./autogen.sh --prefix=/usr
+  make
+  make DESTDIR="$1" install
+fi
