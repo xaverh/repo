@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+# Give Xorg setgid to /dev/input (rootless support).
+chown :input "$KISS_ROOT/usr/bin/Xorg"
+chmod g+s    "$KISS_ROOT/usr/bin/Xorg"
+
+cat <<EOF
+
+NOTE: This is XLibre Xserver (drop-in compatible with Xorg).
+      Install matching XLibre drivers from this repo.
+
+NOTE: You must be a part of the video group
+      for rootless operation to work.
+
+-> addgroup USER video
+
+NOTE: seatd support is enabled. Ensure seatd is running
+      if you want unprivileged X.
+
+EOF
